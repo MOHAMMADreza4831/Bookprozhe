@@ -1,0 +1,7 @@
+
+
+
+
+function Math(params:type) {
+    
+}

@@ -1,0 +1,14 @@
+pagination
+: 
+currentPage
+: 
+1
+perPage
+: 
+10
+total
+: 
+50
+totalPages
+: 
+5

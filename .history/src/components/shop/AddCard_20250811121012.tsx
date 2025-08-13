@@ -1,0 +1,47 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import axioshandel from "../login/header";
+import { Book } from "../Data/interfaceDATA";
+
+type datasubmit = {
+  book_id: string;
+  file_id: string[];
+};
+type typedifult = {
+  book:Book[]
+
+}
+
+export default function Addcard(book:typedifult ) {
+  const queryaclient = useQueryClient();
+
+  const addcartMutatiom = useMutation<datasubmit, Error, datasubmit>({
+    mutationFn: (newcart:datasubmit) => {
+      return axioshandel.post("/basket",newcart);
+      // console.log(newcart,"newcart");
+    },
+
+    onSuccess: (data) => {
+      console.log("talking server", data);
+      toast.success("کارت با موفقیت اضافه شد ");
+    },
+
+    onError: (error) => {
+      toast.error("عملیات ناموفق بود ");
+      console.log("talking server", error.message);
+    },
+  });
+  const handelsubmit = (book:typedifult) => {
+    addcartMutatiom.mutate({
+      book_id: book,
+      file_id: ["2"],
+    });
+    console.log(handelsubmit, "test");
+  };
+
+  return (
+    <>
+      <button onClick={() => handelsubmit(book)}>add</button>
+    </>
+  );
+}

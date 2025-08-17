@@ -19,6 +19,7 @@ function NewCard() {
     queryKey: ["books"],
     queryFn: () => axioshandel.get("/books").then((res) => res.data.data),
   });
+console.log(books);
 
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;

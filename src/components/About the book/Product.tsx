@@ -15,31 +15,24 @@ import { GiEarthAmerica } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Book } from "../Data/interfaceDATA";
+import axioshandel from "../login/header";
+
 
 export default function AboutHistoricalBook() {
-  // const [prices, setprices] = useState(0)
   const [books, setBooks] = useState<Book>();
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // useEffect(() => {
+const handlePurchase =  () => {
 
-  //     axios
-  //       .get("http://10.10.50.76:8001/api/books")
-  //       .then((res) => {
+   
+axioshandel.post("/book-order")
 
-  // });
-  //                if(ifprice.) {
 
-  //                  setprices(ifprice)
-  //                }
-  //               }
-
-  // }, [])
-
+};
   useEffect(() => {
     axios
-      .get("http://10.10.50.76:8003/api/books")
+      .get("http://10.10.50.76:8002/api/books")
       .then((res) => {
         const add = res.data.data.find(
           (book: Book) => book.id.toString() === id
@@ -307,6 +300,7 @@ export default function AboutHistoricalBook() {
 
           <div className="felx justify-center px-3 py-8 ">
             <Button
+              onClick={handlePurchase}
               className="w-full "
               sx={{ backgroundColor: "rgba(149, 188, 204, 1)" }}
               variant="contained"

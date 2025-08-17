@@ -1,7 +1,0 @@
-
-
-
-
-function Math(params:type) {
-    
-}

@@ -6,18 +6,19 @@ import { useQuery } from "@tanstack/react-query";
 import axioshandel from "../login/header";
 import { Divider } from "@mui/material";
 import MathPrice from "./Mathpriec";
-import { IoIosAdd } from "react-icons/io";
 
 export default function Shop() {
-
   const {
     data: basket,
     isLoading,
     isError,
   } = useQuery<Book[]>({
     queryKey: ["basket"],
-    queryFn: () => axioshandel.get("/basket").then((res) => res.data),
-  });  
+    queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
+  });
+console.log(basket);
+
+
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;
   return (
@@ -44,7 +45,8 @@ export default function Shop() {
       </div>
 
       <div className="px-2 py-2  -slate-100 ">
-        {basket?.data.map((book: Book) => (
+      { 
+        basket?.map((book: Book) => (
           <div
             key={book.id}
             className="grid grid-cols-[1fr,3fr] bg-slate-500  my-3 h-[150px] gap-2 shadow-lg rounded-b-2xl"
@@ -72,7 +74,7 @@ export default function Shop() {
                 استفاده از طراح
               </div>
               <Divider variant="middle" className="pt-4" />
-                <MathPrice book={book}/>
+              <MathPrice book={book} />
             </div>
           </div>
         ))}

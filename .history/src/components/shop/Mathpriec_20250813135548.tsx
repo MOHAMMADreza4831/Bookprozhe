@@ -1,7 +1,0 @@
-
-
-
-
-function Mathprice (params:type) {
-    
-}

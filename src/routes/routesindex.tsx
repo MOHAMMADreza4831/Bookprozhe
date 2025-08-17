@@ -14,9 +14,12 @@ import ProductsPage from "@src/components/About the book/ProductsPage";
 import Home from "@src/components/pages/Home/Home";
 import Shop from "@src/components/shop/ShopList";
 import Splashscrean from "@src/components/login/splashscrean";
+// import Login1 from "@src/components/login/login1";
+// import Login2 from "@src/components/login/login2";
+import History from "@src/History/History";
+import Search from "@src/components/pages/search/Search";
 import Login1 from "@src/components/login/login1";
 import Login2 from "@src/components/login/login2";
-import History from "@src/History/History";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -40,7 +43,6 @@ export const routes: RouteObject[] = [
     index: true,
     element: <Splashscrean />,
   },
-  {},
   {
     path: "/auth",
     element: <AuthLayout />,
@@ -94,10 +96,10 @@ export const routes: RouteObject[] = [
         errorElement: <ErrorBoundary />,
 
         children: [
-          // {
-          //   path: "book/:id",
-          //   element: <AboutHistoricalBook />,
-          // },
+          {
+            path: "book/:id",
+            element: <AboutHistoricalBook />,
+          },
 
           {
             index: true,
@@ -105,7 +107,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: PATH_DASHBOARD.navigator.search,
-            element: <div>Search</div>,
+            element: <Search/>,
           },
           {
             path: PATH_DASHBOARD.navigator.profile,

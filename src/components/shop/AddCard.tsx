@@ -4,12 +4,12 @@ import axioshandel from "../login/header";
 import { Book } from "../Data/interfaceDATA";
 import LocalGroceryStoreOutlinedIcon from "@mui/icons-material/LocalGroceryStoreOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Button } from "@mui/material";
 type datasubmit = {
   book_id: number;
-  file_id: string[];
+  file_id:number[];
 };
 type TypeDeletecartItem = {
-  order_id: number;
   file_id: number;
 };
 type Props = {
@@ -22,7 +22,9 @@ export default function Addcard({ book }: Props) {
     queryKey: ["basket"],
     queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
   });
-  const exist = basket?.some((item) => item.book_id === book.book_id );
+
+  const exist =
+    Array.isArray(basket) && basket.some((item) => item.book_id === book.id);
 
   const addcartMutation = useMutation<datasubmit, Error, datasubmit>({
     mutationFn: (newcart: datasubmit) => {
@@ -41,13 +43,11 @@ export default function Addcard({ book }: Props) {
   });
   const DeletecartItem = useMutation<
     TypeDeletecartItem,
-    Error ,
+    Error,
     TypeDeletecartItem
   >({
     mutationFn: (product: TypeDeletecartItem) => {
-      return axioshandel.delete(
-        `/basket/Single/${product.order_id}/${product.file_id}`
-      );
+      return axioshandel.delete(`/basket/Single/${product.file_id}`);
     },
     onSuccess: () => {
       toast.success("کارت با موفقیت از سبد خرید پاک شد  ");
@@ -59,32 +59,29 @@ export default function Addcard({ book }: Props) {
       console.log("talking server");
     },
   });
-
+      console.log(book);
+      
   const handelsubmit = (id: number) => {
-const exist = Array.isArray(basket) && basket.some(item => item.book_id === book.book_id);
+    const exist =  Array.isArray(basket) && basket.some((item) => item.book_id === book.id);
+     const  test = book.files.filter((item) => item.status===2)
+     console.log(test);
+     
+    if (!exist && test.length > 0 ) {
 
-    if (!exist) {
-      addcartMutation.mutate({
-        book_id: book.id,
-        file_id: ["2"],
-      });
-    }
+        addcartMutation.mutate({
+          book_id: book.id,
+          file_id: test.map((item)=> item.id) ,
+        });
+      }
 
-
-    const deletecartitem = basket?.find((item) => item.id === book.book_id);
-console.log(deletecartitem , "deletecartitem");
-console.log(basket,"basket");
-
+    const deletecartitem = basket?.find((item) => item.book_id === book.id);
 
     if (deletecartitem) {
       DeletecartItem.mutate({
-        order_id: deletecartitem.order_id,
         file_id: deletecartitem.file_id,
       });
     }
   };
-
-  // console.log(basket);
 
   return (
     <div
@@ -102,17 +99,20 @@ console.log(basket,"basket");
         }}
       >
         {exist ? (
-          <ShoppingCartIcon
-            className="w-[16px] "
-            sx={{ color: "#1f5566", opacity: "1" }}
-          />
+          <Button>
+            <ShoppingCartIcon
+              className="w-[16px] "
+              sx={{ color: "#1f5566", opacity: "1" }}
+            />
+          </Button>
         ) : (
-          <LocalGroceryStoreOutlinedIcon
-            className="w-[16px] "
-            sx={{ color: "#1f5566", opacity: "1" }}
-          />
+          <Button disabled>
+            <LocalGroceryStoreOutlinedIcon
+              className="w-[16px] "
+              sx={{ color: "#1f5566", opacity: "1" }}
+            />
+          </Button>
         )}
-
       </button>
     </div>
   );

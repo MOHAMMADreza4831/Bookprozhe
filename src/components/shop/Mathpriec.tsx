@@ -3,24 +3,30 @@ import { IoIosAdd } from "react-icons/io";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import axioshandel from "../login/header";
-import { useEffect } from "react";
+import { Button } from "@mui/material";
+import { useState } from "react";
 type datasubmit = {
   book_id: number;
   file_id: string[];
 };
+type TypeDeletecartItem = {
+  file_id:  string[];
+};
 
-type datatype = { 
-    book:Book
-}
 
-export default function MathPrice({book}:datatype) {
-  const { data: basket } = useQuery<Book[]>({
-    queryKey: ["basket"],
-    queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
-  });
+type datatype = {
+  book: Book;
+};
 
-  const inavalidtest = useQueryClient()
+export default function MathPrice({ book }: datatype) {
+  const [addTranslation, setaddTranslation] = useState(false);
+  // const { data: basket } = useQuery<Book[]>({
+  //   queryKey: ["basket"],
+  //   queryFn: () => axioshandel.get("/basket").then((res) => res.data),
+  // });
+  const queryinvalid = useQueryClient();
 
+  const inavalidtest = useQueryClient();
 
   const addcartMutation = useMutation<datasubmit, Error, datasubmit>({
     mutationFn: (newcart: datasubmit) => {
@@ -29,7 +35,7 @@ export default function MathPrice({book}:datatype) {
 
     onSuccess: () => {
       toast.success("کارت با موفقیت اضافه شد ");
-      inavalidtest.invalidateQueries()
+      inavalidtest.invalidateQueries();
     },
 
     onError: () => {
@@ -38,67 +44,87 @@ export default function MathPrice({book}:datatype) {
     },
   });
 
-  
+
+const DeletecartItem = useMutation<
+    TypeDeletecartItem,
+    Error ,
+    TypeDeletecartItem
+  >({
+    mutationFn: (product: TypeDeletecartItem) => {
+      return axioshandel.delete(
+        `/basket/Single/${product.file_id}`
+      );
+    },
+    onSuccess: () => {
+      toast.success("کارت با موفقیت از سبد خرید پاک شد  ");
+      queryinvalid.invalidateQueries({ queryKey: ["basket"] });
+    },
+
+    onError: () => {
+      toast.error("عملیات پاک کردن از سبد خرید نا موفق بود   ");
+      console.log("talking server");
+    },
+  });
+
+
 
   const handleAddTranslation = () => {
+        if (addTranslation){
 
-
-      addcartMutation.mutate({ 
-          book_id: book.book_id,
-          file_id: ["3"],
+          
+          addcartMutation.mutate({
+            book_id: book.book_id,
+            file_id: ["3"],
+          });
+        }else { 
+          DeletecartItem.mutate({
+            file_id:["3"]
+          })
         }
-    )
-    
-    
-  };
-// useEffect(() => {
-//   const uniqueBasket = basket?.filter((item, index, self) => {
-//   return self.findIndex(obj => obj.book_id === item.book_id) === index;
-//   });
-//   console.log(uniqueBasket,"uniqueBasket");
-  
+        };
+  // useEffect(() => {
+  //   const uniqueBasket = basket?.filter((item, index, self) => {
+  //   return self.findIndex(obj => obj.book_id === item.book_id) === index;
+  //   });
+  //   console.log(uniqueBasket,"uniqueBasket");
 
-// }, [])
-
-
-
+  // }, [])
 
   const handleAddSummary = () => {
-      addcartMutation.mutate({ 
-          book_id:book.book_id,
-          file_id: [`4`], 
-        }
-    )
-
+    addcartMutation.mutate({
+      book_id: book.book_id,
+      file_id: [`4`],
+    });
   };
 
-
   return (
-           <div className="flex flex-col w-full items-center">
-                <div className="flex justify-between   w-full">
-                  <div>خلاصه</div>
-                  <button className="flex " onClick={handleAddSummary}>
-                    <div>قیمت</div>
-                    <div className="flex items-center">
-                      
-                      <IoIosAdd style={{ color: "#DD7475" }} />
-                      
-                    </div>
-                  </button>
-                </div>
-                <div className="flex justify-between   w-full">
-                  <div>ترجمه</div>
-                  <div className="flex ">
-                    <div>قیمت</div>
-                    <button  className="flex items-center" onClick={handleAddTranslation}>
-                      <IoIosAdd style={{ color: "#DD7475" }} />
-                    </button>
-                  </div>
-                </div>
-                <div style={{backgroundColor:"#FCDCDC"}} className="flex justify-between pl-2  w-[18em]">
-                  <div> قیمت کل</div>
-                  <div> قیمت:{book.total}</div>
-                </div>
-              </div>
+    <div className="flex flex-col w-full items-center">
+      <div className="flex justify-between   w-full">
+        <div>خلاصه</div>
+        <button className="flex " onClick={handleAddSummary}>
+          <div>قیمت</div>
+          <div className="flex items-center">
+            <IoIosAdd style={{ color: "#DD7475" }} />
+          </div>
+        </button>
+      </div>
+      <div className="flex justify-between   w-full">
+        <div>ترجمه</div>
+        <div className="flex ">
+          <div>قیمت</div>
+
+          <Button className="flex items-center" onClick={handleAddTranslation}>
+            <IoIosAdd style={{ color: "#DD7475" }} />
+          </Button>
+        </div>
+      </div>
+      <div
+        style={{ backgroundColor: "#FCDCDC" }}
+        className="flex justify-between pl-2  w-[18em]"
+      >
+        <div> قیمت کل</div>
+        <div> قیمت:{book.total}</div>
+      </div>
+    </div>
   );
 }

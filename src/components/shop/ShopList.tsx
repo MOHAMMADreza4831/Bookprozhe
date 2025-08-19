@@ -2,12 +2,13 @@ import { Book } from "../Data/interfaceDATA";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { PATH_DASHBOARD } from "@src/routes/paths";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axioshandel from "../login/header";
-import { Divider } from "@mui/material";
-import MathPrice from "./Mathpriec";
+import { Button, Divider } from "@mui/material";
+import { useEffect } from "react";
 
 export default function Shop() {
+  const invalid = useQueryClient();
   const {
     data: basket,
     isLoading,
@@ -16,11 +17,30 @@ export default function Shop() {
     queryKey: ["basket"],
     queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
   });
-console.log(basket);
 
+  const addToBasket = useMutation({
+    mutationFn: () => axioshandel.post("/book-order"),
+    onSuccess: () => {
+      invalid.invalidateQueries({ queryKey: ["basket"] });
+      console.log("salam");
+
+      alert("کتاب با موفقیت خریداری شد!");
+    },
+    onError: () => {
+      alert("عملیات ناموفق بود!");
+    },
+  });
+
+  useEffect(() => {
+    if (basket) {
+      localStorage.setItem("basket", JSON.stringify(basket));
+    }
+  }, [basket]);
 
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;
+
+  console.log(basket, "basket");
   return (
     <>
       <div>
@@ -44,40 +64,64 @@ console.log(basket);
         </div>
       </div>
 
-      <div className="px-2 py-2  -slate-100 ">
-      { 
-        basket?.map((book: Book) => (
-          <div
-            key={book.id}
-            className="grid grid-cols-[1fr,3fr] bg-slate-500  my-3 h-[150px] gap-2 shadow-lg rounded-b-2xl"
-          >
-            <div className="     justify-center items-center    ">
-              <img
-                src={book.image}
-                alt={book.title}
-                className="flex top   bg-black object-contain h-full  "
-              />
-            </div>
-            <div>
-              <div
-                style={{
-                  fontSize: " 1em",
-                  display: " flex ",
-                  width: "19em",
-                  whiteSpace: "pre",
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                }}
-                className=""
-              >
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراح
+      <div className="px-2 py-2  bg-slate-100 ">
+        {Array.isArray(basket) &&
+          basket?.map((book: Book) => (
+            <div
+              key={book.id}
+              className="grid grid-cols-[1fr,3fr]  my-3 h-[150px] gap-2 shadow-lg rounded-b-2xl"
+            >
+              <div className="     overflow-auto  justify-center items-center    ">
+                <img
+                  src={book.image}
+                  alt={book.title}
+                  className="flex    bg-black  object-contain h-full  "
+                />
               </div>
-              <Divider variant="middle" className="pt-4" />
-              <MathPrice book={book} />
+              <div>
+                <div className="">{book.title} :</div>
+                <div
+                  style={{
+                    fontSize: " 1em",
+                    display: " flex ",
+                    width: "19em",
+                    whiteSpace: "pre",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                  }}
+                  className=""
+                >
+                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                  استفاده از طراح
+                </div>
+                <Divider variant="middle" className="pt-4" />
+                <div className="flex justify-center">
+                  {book.book_files.some((item) => item.status === 2) ? (
+                    <p>فایل اصلی</p>
+                  ) : null}
+                </div>
+                <div
+                  style={{ backgroundColor: "#FCDCDC" }}
+                  className="flex justify-between pl-2  p-3 rounded-[3px] w-[18em]"
+                >
+                  <div> قیمت کل</div>
+                  <div>
+                    قیمت:
+                    {book.file?.status === 0 ? book.file.price : null}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        {basket && basket.length > 0 ? (
+          <Button
+            onClick={() => addToBasket.mutate()}
+            className="w-full py-5  bg-[#95BCCC] "
+            sx={{ color: "white" }}
+          >
+            خرید
+          </Button>
+        ) : null}
       </div>
     </>
   );

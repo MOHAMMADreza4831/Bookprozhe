@@ -10,6 +10,7 @@ import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
 export default function MenuHome() {
+  
   const Navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -19,6 +20,12 @@ export default function MenuHome() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
+  const handellogout = () => { 
+    localStorage.removeItem("token")
+    console.log("login")
+    Navigate("/auth/login")
+  }
 
   return (
     <Box>
@@ -56,7 +63,13 @@ export default function MenuHome() {
           horizontal: "center",
         }}
       >
-        <MenuItem onClick={handleClose} className="gap-1">
+        <MenuItem
+          className="gap-1"
+          onClick={() => {
+            handleClose();
+            Navigate("/profile");
+          }}
+        >
           <IoPersonOutline />
           پروفابل
         </MenuItem>
@@ -70,11 +83,15 @@ export default function MenuHome() {
           <MdOutlineShoppingCart />
           سبد خرید
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <LuSquareArrowOutUpRight style={{ fontSize: "15px" }} />
+        <MenuItem onClick={()=>{ 
+          handellogout()
+          handleClose() ;
+        }}>
+          <LuSquareArrowOutUpRight   style={{ fontSize: "15px" }} />
           خروج از حساب
         </MenuItem>
       </Menu>
     </Box>
   );
 }
+//axioshandel.post("/users/login"

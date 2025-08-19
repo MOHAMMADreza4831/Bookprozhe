@@ -23,13 +23,11 @@ export default function AboutHistoricalBook() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-const handlePurchase =  () => {
-
-   
-axioshandel.post("/book-order")
 
 
-};
+
+
+
   useEffect(() => {
     axios
       .get("http://10.10.50.76:8002/api/books")

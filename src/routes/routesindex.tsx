@@ -20,6 +20,12 @@ import History from "@src/History/History";
 import Search from "@src/components/pages/search/Search";
 import Login1 from "@src/components/login/login1";
 import Login2 from "@src/components/login/login2";
+import Profile from "@src/components/pages/profile";
+import EditProfile from "@src/components/pages/profile";
+import Profilemain from "@src/components/pages/profile/profilemain";
+import Savecard from "@src/components/pages/profile/savecart";
+import Like from "@src/components/pages/profile/like";
+import Detailprofile from "@src/components/pages/profile/detailprofile";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -55,10 +61,7 @@ export const routes: RouteObject[] = [
         path: "login",
         element: <Login1 />,
       },
-      {
-        path: "login2",
-        element: <Login2 />,
-      },
+
       // {
       //   path: "dashboard/category/:type",
       //   element: <BooksCategoryDashboardPage />,
@@ -83,6 +86,26 @@ export const routes: RouteObject[] = [
       {
         path: "Shop",
         element: <Shop />,
+      },
+      {
+        path: "profile",
+        element: <Profilemain />,
+      },
+      {
+        path: "editProfile/:id",
+        element: <EditProfile />,
+      },
+      {
+        path: "detailprofile",
+        element: <Detailprofile />,
+      },
+      {
+        path: "savecard",
+        element: <Savecard />,
+      },
+      {
+        path: "like",
+        element: <Like />,
       },
       {
         path: "products/newbook/:pageNumber",

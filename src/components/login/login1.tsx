@@ -30,6 +30,7 @@ export default function Login1() {
     message: string;
   }>({ type: "", message: "" });
 
+
   const {
     register,
     handleSubmit,
@@ -48,7 +49,6 @@ export default function Login1() {
       });
       
       const Token = res.data.data.token ; 
-      console.log(Token,"in pade ");
       
     
       if (Token) {
@@ -60,7 +60,7 @@ export default function Login1() {
         navigate(PATH_DASHBOARD.navigator.home,);
       }, 2500);
     } catch (err) {
-      console.log(err);
+      console.log(err); 
       setAlert({ type: "error", message: "ورود ناموفق بود" });
     }
   };
@@ -85,7 +85,7 @@ export default function Login1() {
               type="text"
               label="شماره تماس"
               error={!!errors.email}
-              placeholder="09123456789"
+              placeholder="abanBook@gmail.com"
               helperText={errors.email?.message || ""}
               fullWidth
             />
@@ -94,8 +94,8 @@ export default function Login1() {
               className="w-[350px]"
               type="password"
               label="رمز عبور"
-              error={!!errors.Password}
               placeholder="******"
+              error={!!errors.Password}
               helperText={errors.Password?.message || ""}
               fullWidth
             />

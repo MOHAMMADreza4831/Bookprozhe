@@ -7,17 +7,20 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button } from "@mui/material";
 type datasubmit = {
   book_id: number;
-  file_id:number[];
+  file_id: number[];
+  description:string
 };
 type TypeDeletecartItem = {
   file_id: number;
 };
+
 type Props = {
   book: Book;
 };
 
 export default function Addcard({ book }: Props) {
   const queryinvalid = useQueryClient();
+
   const { data: basket } = useQuery<Book[]>({
     queryKey: ["basket"],
     queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
@@ -59,20 +62,23 @@ export default function Addcard({ book }: Props) {
       console.log("talking server");
     },
   });
-      console.log(book);
-      
-  const handelsubmit = (id: number) => {
-    const exist =  Array.isArray(basket) && basket.some((item) => item.book_id === book.id);
-     const  test = book.files.filter((item) => item.status===2)
-     console.log(test);
-     
-    if (!exist && test.length > 0 ) {
+  console.log(book);
 
-        addcartMutation.mutate({
-          book_id: book.id,
-          file_id: test.map((item)=> item.id) ,
-        });
-      }
+  const handelsubmit = (id: number) => {
+    const exist =
+      Array.isArray(basket) && basket.some((item) => item.book_id === book.id);
+
+    const test = book.files.filter((item) => item.status === 0);
+
+    console.log(test, "test");
+
+    if (!exist && test.length > 0) {
+      addcartMutation.mutate({
+        book_id: book.id,
+        file_id: test.map((item) => item.id),
+        description:" "
+      });
+    }
 
     const deletecartitem = basket?.find((item) => item.book_id === book.id);
 
@@ -99,19 +105,15 @@ export default function Addcard({ book }: Props) {
         }}
       >
         {exist ? (
-          <Button>
-            <ShoppingCartIcon
-              className="w-[16px] "
-              sx={{ color: "#1f5566", opacity: "1" }}
-            />
-          </Button>
+          <ShoppingCartIcon
+            className="w-[16px] "
+            sx={{ color: "#1f5566", opacity: "1" }}
+          />
         ) : (
-          <Button disabled>
-            <LocalGroceryStoreOutlinedIcon
-              className="w-[16px] "
-              sx={{ color: "#1f5566", opacity: "1" }}
-            />
-          </Button>
+          <LocalGroceryStoreOutlinedIcon
+            className="w-[16px] "
+            sx={{ color: "#1f5566", opacity: "1" }}
+          />
         )}
       </button>
     </div>

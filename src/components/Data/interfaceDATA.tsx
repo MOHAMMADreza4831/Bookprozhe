@@ -18,7 +18,6 @@ export interface Price {
   status: number;
 }
 export interface typefilebasket {
-  
   id: number;
   file: string;
   language: string;
@@ -54,14 +53,39 @@ export interface databook_files {
   updated_at: null;
 }
 
+export interface collection_ref {
+  id: number;
+
+  title: string;
+  author: string;
+  language: string;
+  age: number;
+  description: string;
+  summary: string;
+  is_translated: number;
+
+  shabak: string;
+  pages: string;
+
+  rate: number;
+  image: string;
+  created_at: string;
+  updated_at: string;
+  picture: string;
+}
+
 export interface Book {
   basket: string;
+  ref_id: number;
   description: string;
+
+  collection: number;
   total: number;
   order_id: number;
   status: number;
   book_id: number;
   type: string[];
+  ref:collection_ref
   image: string;
   author: string;
   Genre: string;

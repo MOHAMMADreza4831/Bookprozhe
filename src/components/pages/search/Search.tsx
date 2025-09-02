@@ -40,14 +40,18 @@ export default function Search() {
     item.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handelsearch = () => {
-    if (search.trim() === "") return;
-    if (!Historysearch.includes(search)) {
-      const newsearch = [search, ...Historysearch];
-      setHistorysearch(newsearch);
-      localStorage.setItem("serchhistory", JSON.stringify(newsearch));
-    }
-  };
+const handelsearch = () => {
+  if (search.trim() === "") return;
+
+  if (!Historysearch.includes(search)) {
+    const newsearch = [search, ...Historysearch];
+    setHistorysearch(newsearch);
+    localStorage.setItem("serchhistory", JSON.stringify(newsearch));
+  }
+
+  setsearch(""); // فیلد پاک می‌شود
+};
+
 
   const handelsub = (term: string) => {
     setsearch(term);
@@ -64,7 +68,6 @@ export default function Search() {
       handelsearch();
     }
   };
-  console.log(Data);
 
   return (
     <>
@@ -100,34 +103,26 @@ export default function Search() {
           >
             جستجو
           </Button>
-
-          {/* <div>
-            {Historysearch.map((item,index) => (
-              <Card sx={{}} key={index.id} onClick={() => setsearch(item)} >
-                {item}
-              </Card>
-            ))}
-          </div> */}
         </div>
         {Historysearch.length > 0 && (
           <div>
-            <h2 className="font-bold">جستجو های اخیر </h2>
-            {Historysearch.map((term, index) => (
+            <h2 className="font-bold">جستجوهای اخیر</h2>
+            {Historysearch.slice(0, 4).map((term, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between w-full "
+                className="flex items-center justify-between w-full"
               >
                 <div>
                   <AccessTimeIcon sx={{ opacity: 0.5 }} />
                   <Button
                     style={{ color: "black", borderRadius: "0 0 0px 0px" }}
-                    className=" p-4 "
+                    className="p-4"
                     onClick={() => handelsub(term)}
                   >
                     {term}
                   </Button>
                 </div>
-                <button onClick={() => handeldelete}>
+                <button onClick={() => handeldelete(term)}>
                   <CloseIcon />
                 </button>
               </div>
@@ -136,34 +131,36 @@ export default function Search() {
         )}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-10">
+      <div className="flex flex-wrap gap-4 pt-10 justify-start pr-4 ">
         {search ? (
           filtersearch.length > 0 ? (
             filtersearch.map((item) => (
-              <Card>
-                <Link to={PATH_BOOKS.navigator.details(item.id)}>
-                  <CardMedia
-                    component="img"
-                    image={item.image}
-                    alt={item.title}
-                    className="w-full h-48 object-contain"
-                  />
-                </Link>
+              <div className="flex-shrink-0  w-[200px] h-[300px] ">
+                <Card>
+                  <Link to={PATH_BOOKS.navigator.details(item.id)}>
+                    <CardMedia
+                      component="img"
+                      image={item.image}
+                      alt={item.title}
+                      className="w-full h-48 object-contain"
+                    />
+                  </Link>
 
-                <Box className="flex flex-col">
-                  <Typography variant="h6" className="w-40">
-                    {item.title}
-                  </Typography>
+                  <Box className="flex flex-col">
+                    <Typography variant="h6" className="w-40">
+                      {item.title}
+                    </Typography>
 
-                  <Box className="flex justify-between m-2 ">
-                    <Buttonicone book={item} />
-                    <Box className="flex items-center gap-1">
-                      <Rating rating={item.rating} />
-                      <p>{item.rating}</p>
+                    <Box className="flex justify-between m-2 ">
+                      <Buttonicone book={item} />
+                      <Box className="flex items-center gap-1">
+                        <Rating rating={item.rating} />
+                        <p>{item.rating}</p>
+                      </Box>
                     </Box>
                   </Box>
-                </Box>
-              </Card>
+                </Card>
+              </div>
             ))
           ) : (
             <p>کتاب پیدا نشد </p>

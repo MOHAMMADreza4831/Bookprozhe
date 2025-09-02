@@ -15,31 +15,22 @@ import { GiEarthAmerica } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Book } from "../Data/interfaceDATA";
-import axioshandel from "../login/header";
-
+import ModalBUY from "./modalbuy";
 
 export default function AboutHistoricalBook() {
-  const [books, setBooks] = useState<Book>();
+  const [book, setBook] = useState<Book | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
-
-
-
-
-
-
   useEffect(() => {
     axios
       .get("http://10.10.50.76:8002/api/books")
       .then((res) => {
-        const add = res.data.data.find(
-          (book: Book) => book.id.toString() === id
-        );
-        if (add) setBooks(add);
+        const add = res.data.data.find((b: Book) => b.id.toString() === id);
+        if (add) setBook(add);
       })
       .catch((err) => console.log("خطا:", err));
   }, [id]);
-  if (!books) return <div>کتاب پیدا نشد!</div>;
+  if (!book) return <div>کتاب پیدا نشد!</div>;
 
   return (
     <>
@@ -64,13 +55,13 @@ export default function AboutHistoricalBook() {
       <header>
         <div className="flex pt-4 px-4 ">
           <Box className="">
-            <img src={books.image} alt={books.title} className=" w-44  " />
+            <img src={book.image} alt={book.title} className=" w-44  " />
           </Box>
           <div className=" p-9">
             <section className="flex flex-col ">
               <div>
                 <h2 className="font-bold   pt-2" style={{ fontSize: "20px" }}>
-                  {books.title}
+                  {book.title}
                 </h2>
               </div>
               <Box className="felx flex-col">
@@ -95,7 +86,7 @@ export default function AboutHistoricalBook() {
                     <TimelineContent>
                       <div className="flex flex-row">
                         <div style={{ color: "rgba(107, 107, 107, 1)" }}>
-                          {books.author}
+                          {book.author}
                         </div>
                         <p
                           style={{ color: "rgba(107, 107, 107, 1)" }}
@@ -129,8 +120,10 @@ export default function AboutHistoricalBook() {
                           className="flex     gap-1 "
                           style={{ color: "rgba(107, 107, 107, 1)" }}
                         >
-                          {books.genre.map((g) => (
-                            <h5 key={g.id} className=" break-words">{g.title}</h5>
+                          {book.genre?.map((g) => (
+                            <h5 key={g.id} className=" break-words">
+                              {g.title}
+                            </h5>
                           ))}
                           :ژانر
                         </div>
@@ -154,7 +147,7 @@ export default function AboutHistoricalBook() {
                     <TimelineContent className="">
                       <div className="flex flex-row">
                         <div style={{ color: "rgba(107, 107, 107, 1)" }}>
-                          {books.pages}
+                          {book.pages}
                         </div>
                         <p
                           style={{ color: "rgba(107, 107, 107, 1)" }}
@@ -186,7 +179,7 @@ export default function AboutHistoricalBook() {
                           style={{ color: "rgba(107, 107, 107, 1)" }}
                         >
                           شابک:
-                          {books.shabak}
+                          {book.shabak}
                         </div>
                       </div>
                     </TimelineContent>
@@ -212,7 +205,7 @@ export default function AboutHistoricalBook() {
                     <TimelineContent>
                       <div className="flex flex-row">
                         <div style={{ color: "rgba(107, 107, 107, 1)" }}>
-                          {books.is_translated ? "دارد" : "ندارد "}
+                          {book.is_translated ? "دارد" : "ندارد "}
                         </div>
 
                         <p
@@ -246,7 +239,7 @@ export default function AboutHistoricalBook() {
                 className="flex flex-row-reverse"
                 precision={0.5}
                 name="read-only"
-                value={books.rate}
+                value={book.rate}
                 readOnly
                 sx={{
                   direction: "ltr",
@@ -263,7 +256,7 @@ export default function AboutHistoricalBook() {
                 <div className="flex flex-row gap-4">
                   <div>قیمت:</div>
                   <div className="flex flex-row gap-1">
-                    {books.files
+                    {book.files
                       .filter((f) => f.status === 2)
                       .map((f) => {
                         return (
@@ -282,29 +275,22 @@ export default function AboutHistoricalBook() {
           <section className="flex flex-row gap-10 justify-center pt-10">
             <div className="flex flex-col items-center">
               <PiBaby className="text-4xl " />
-              <p className="items-center">رده سنی {books.age}+</p>
+              <p className="items-center">رده سنی {book.age}+</p>
             </div>
 
             <div className="flex flex-col items-center">
               <LiaCalendar className="text-4xl" />
               تاریخ انتشار:
-              {new Date(books.created_at).toLocaleDateString("fa-IR")}
+              {new Date(book.created_at).toLocaleDateString("fa-IR")}
             </div>
             <div className="flex flex-col items-center">
               <GiEarthAmerica className="text-4xl" />
-              زبان:{books.language}
+              زبان:{book.language}
             </div>
           </section>
 
-          <div className="felx justify-center px-3 py-8 ">
-            <Button
-              onClick={handlePurchase}
-              className="w-full "
-              sx={{ backgroundColor: "rgba(149, 188, 204, 1)" }}
-              variant="contained"
-            >
-              خرید کتاب
-            </Button>
+          <div className="">
+            <ModalBUY book={book} />
           </div>
           <section>
             <div>

@@ -18,12 +18,13 @@ export default function Shop() {
     queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
   });
 
+  console.log(basket)
+  
   const addToBasket = useMutation({
+    
     mutationFn: () => axioshandel.post("/book-order"),
     onSuccess: () => {
       invalid.invalidateQueries({ queryKey: ["basket"] });
-      console.log("salam");
-
       alert("کتاب با موفقیت خریداری شد!");
     },
     onError: () => {
@@ -40,7 +41,6 @@ export default function Shop() {
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;
 
-  console.log(basket, "basket");
   return (
     <>
       <div>
@@ -95,11 +95,7 @@ export default function Shop() {
                   استفاده از طراح
                 </div>
                 <Divider variant="middle" className="pt-4" />
-                <div className="flex justify-center">
-                  {book.book_files.some((item) => item.status === 2) ? (
-                    <p>فایل اصلی</p>
-                  ) : null}
-                </div>
+                <div className="flex justify-center"></div>
                 <div
                   style={{ backgroundColor: "#FCDCDC" }}
                   className="flex justify-between pl-2  p-3 rounded-[3px] w-[18em]"

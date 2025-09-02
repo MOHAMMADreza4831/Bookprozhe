@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "@src/routes/paths";
 import { Book } from "../Data/interfaceDATA";
 import axios from "axios";
+import axioshandel from "../login/header";
 
 export default function ProductsPage() {
   const itemsPerPage = 5; 
@@ -22,7 +23,7 @@ export default function ProductsPage() {
   const [totalPages, setTotalPages] = useState<number>(1);
 
   useEffect(() => {
-    axios.get(`http://10.10.50.76:8001/api/books`).then((res) => {
+    axioshandel.get(`/books`).then((res) => {
       setBooks(res.data.data);
       const totalItems = res.data.data.length;
       const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);

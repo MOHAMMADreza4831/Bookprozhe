@@ -12,20 +12,23 @@ import AboutHistoricalBook from "@src/components/About the book/Product";
 // import BooksCategoryDashboardPage from "@src/components/About the book/BooksCategoryDashboardPage";
 import ProductsPage from "@src/components/About the book/ProductsPage";
 import Home from "@src/components/pages/Home/Home";
+
 import Shop from "@src/components/shop/ShopList";
-import Splashscrean from "@src/components/login/splashscrean";
+// import Splashscrean from "@src/components/login/splashscrean";
 // import Login1 from "@src/components/login/login1";
-// import Login2 from "@src/components/login/login2";
+// import Login2 from "@src/components/login/login2";\
 import History from "@src/History/History";
 import Search from "@src/components/pages/search/Search";
-import Login1 from "@src/components/login/login1";
-import Login2 from "@src/components/login/login2";
-import Profile from "@src/components/pages/profile";
+// import Login1 from "@src/components/login/login1";
+// import Login2 from "@src/components/login/login2";
+// import Profile from "@src/components/pages/profile";
 import EditProfile from "@src/components/pages/profile";
 import Profilemain from "@src/components/pages/profile/profilemain";
-import Savecard from "@src/components/pages/profile/savecart";
-import Like from "@src/components/pages/profile/like";
 import Detailprofile from "@src/components/pages/profile/detailprofile";
+import Favorites from "@src/components/pages/Collection/Favorites";
+import SaveCart from "@src/components/pages/Collection/SaveCart";
+import Splashscrean from "@src/components/login/splashscrean";
+import Login1 from "@src/components/login/login1";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -53,15 +56,14 @@ export const routes: RouteObject[] = [
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      {
-        index: true,
-        element: <Navigate to={PATH_AUTH.login} replace />,
-      },
+      // {
+      //   index: true,
+      //   element: <Navigate to={PATH_AUTH.login} replace />,
+      // },
       {
         path: "login",
         element: <Login1 />,
       },
-
       // {
       //   path: "dashboard/category/:type",
       //   element: <BooksCategoryDashboardPage />,
@@ -101,11 +103,11 @@ export const routes: RouteObject[] = [
       },
       {
         path: "savecard",
-        element: <Savecard />,
+        element: <SaveCart  />,
       },
       {
-        path: "like",
-        element: <Like />,
+        path: "favorites",
+        element: <Favorites />,
       },
       {
         path: "products/newbook/:pageNumber",
@@ -130,7 +132,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: PATH_DASHBOARD.navigator.search,
-            element: <Search/>,
+            element: <Search />,
           },
           {
             path: PATH_DASHBOARD.navigator.profile,

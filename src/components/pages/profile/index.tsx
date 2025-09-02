@@ -1,98 +1,131 @@
-import { Avatar, Button, ButtonBase, TextField } from "@mui/material";
-import { PATH_DASHBOARD } from "@src/routes/paths";
+import { Avatar, ButtonBase, TextField } from "@mui/material";
 import * as React from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import "dayjs/locale/fa";
 import "dayjs/locale/fa";
 import axioshandel from "@src/components/login/header";
-import { DatePicker } from "jalaali-react-date-picker";
+import { Button } from "@mui/material";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 
 type datatype = {
   id: number;
   email: string;
   firstname: string;
-  birth_date: string;
+  birth_date: string | null;
   lastname: string;
   image: string;
+  phone: string;
 };
 
 const emailSchema = z.object({
-  // phone: z
-  //   .string()
-  //   .regex(/^(?:\+98|0098|0)?9[0-9]{9}$/, "شماره تلفن وارد شده اشتباه است ")
-  //   .min(11, "شماره تلفن وارد شده اشتباه است"),
-
-  email: z
-    .string()
-    .min(1, { message: "This field has to be filled." })
-    .email("This is not a valid email."),
-
-  firstname: z.string().min(2, "نام خود را وارد کنیدد "),
-  lastname: z.string().min(3, "نام خانوادگی خود را وارد کنی"),
+  firstname: z.string().min(2, "نام خود را وارد کنیدد ").optional(),
+  lastname: z.string().min(3, "نام خانوادگی خود را وارد کنی").optional(),
+  phone: z.string(),
+  image: z.string().optional().nullable(),
+  birth_date: z.any(),
 });
 
 export default function EditProfile() {
+  const [datadate, setdatadate] = React.useState<DateObject | null>(null);
+  const [avatarFile, setAvatarFile] = React.useState<File | null>(null);
 
-  // const { id } = useParams<{ id: string }>();
+  console.log(datadate);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
+    setValue,
   } = useForm<datatype>({
     resolver: zodResolver(emailSchema),
   });
 
-  const onsubmit = async (data: datatype) => {
-    try {
-      await axioshandel.put("/user/update", {
-        first_name: data.firstname,
-        last_name: data.lastname,
-        email: data.email,
-        image: data.image,
-        birth_date: data.birth_date,
+  React.useEffect(() => {
+    axioshandel.get("/user").then((res) => {
+      const user = res.data.data;
+      reset({
+        firstname: user.first_name,
+        lastname: user.last_name,
+        phone: user.phone,
+        birth_date: user.birth_date,
+        email: user.email,
+        image: user.image,
       });
-      await navigate(-1);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+      if (user.birth_date) {
+        setdatadate(
+          new DateObject({
+            date: user.birth_date,
+            format: "YYYY-MM-DD",
+          })
+        );
+      }
+    });
+  }, [reset]);
 
   const [Avatardata, setAvatardata] = React.useState<string | undefined>(
     undefined
   );
   const navigate = useNavigate();
 
-  const handeladdavatar = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setAvatardata(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+const handeladdavatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const file = event.target.files?.[0];
+  if (file) {
+    setAvatarFile(file); 
+    const reader = new FileReader();
+    reader.onload = () => {
+      setAvatardata(reader.result as string);
+      setValue("image", reader.result as string); 
+    };
+    reader.readAsDataURL(file);
+  }
+};
+  const onSubmit = async (data: datatype) => {
+    const formData = new FormData();
+    formData.append("_method",  "put");
+
+    formData.append("first_name", data.firstname || "");
+    formData.append("last_name", data.lastname || "");
+    formData.append("phone", data.phone);
+    formData.append(
+      "birth_date",
+      datadate ? datadate.format("YYYY-MM-DD") : ""
+    );
+    console.log(formData);
+    if (avatarFile) {
+      formData.append("image",avatarFile);
+    }
+
+    try {
+      await axioshandel.post("/user/update", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      navigate(-1);
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit(onsubmit)} encType="multipart/form-data">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div
         className="sticky to flex-row z-10  w-full h-16  "
         style={{ backgroundColor: "#95bccc" }}
       >
         <div className="flex      py-4 ">
-          <IoChevronBackOutline
-            style={{ color: "white" }}
-            className="  rotate-180 size-5 "
-          />
           <button
-            onClick={() => navigate(PATH_DASHBOARD.navigator.home)}
+            onClick={() => navigate(-1)}
             style={{ color: "white" }}
-            className="font-bold"
+            className="font-bold flex "
           >
+            <IoChevronBackOutline
+              style={{ color: "white" }}
+              className="  rotate-180 size-5 "
+            />
             بازگشت
           </button>
         </div>
@@ -142,8 +175,8 @@ export default function EditProfile() {
       <div className="flex flex-col justify-center gap-4 mt-5 mx-10">
         <TextField
           {...register("firstname")}
-          id="outlined-password-input"
           label="نام "
+          InputLabelProps={{ shrink: true }}
           type="text"
           error={!!errors.firstname}
           helperText={errors.firstname?.message || ""}
@@ -151,65 +184,40 @@ export default function EditProfile() {
         />
         <TextField
           {...register("lastname")}
-          id="outlined-password-input"
           label="نام خانوادگی"
+          InputLabelProps={{ shrink: true }}
           type="text"
           error={!!errors.lastname}
           helperText={errors.lastname?.message || ""}
           autoComplete="current-password"
         />
-        {/* <TextField
+        <TextField
           {...register("phone")}
-          id=""
+          label="شماره موبایل "
+          InputLabelProps={{ shrink: true }}
+          InputProps={{ readOnly: true }}
+          type="text"
           error={!!errors.phone}
           helperText={errors.phone?.message || ""}
-          label="شماره موبایل"
-          type="number"
-          autoComplete=""
-        /> */}
-        <TextField
-          {...register("email")}
-          id="outlined-password-input"
-          label="ایمیل"
-          type="text"
-          error={!!errors.email}
-          helperText={errors.email?.message || ""}
           autoComplete="current-password"
         />
-        <TextField
-          id="outlined-password-input"
-          label="اینستاگرام"
-          type="text"
-          autoComplete=""
+        <DatePicker
+          format="YYYY-MM-DD"
+          value={datadate}
+          onChange={setdatadate}
         />
-        <div className="felx justify-center  ">
-          <DatePicker />
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fa"> 
-            <DatePicker
-              label="تاریخ تولد"
-              value={birthdate}
-              onChange={(newValue) => {
-                setBirthdate(newValue); 
-              }}
-              slotProps={{
-                textField: {
-                  helperText: "تاریخ تولد خود را انتخاب کنید",
-                },
-              }}
-            /> 
-         </LocalizationProvider> */}
-        </div>
+        <div className="felx justify-center  "></div>
       </div>
       <div className="felx justify-center px-3 py-8 ">
         <Button
           type="submit"
           className="w-full "
-          sx={{ backgroundColor: "rgba(149, 188, 204, 1)" }}
-          variant="contained"
+          fullWidth
+          style={{ backgroundColor: "rgba(149, 188, 204, 1)" }}
         >
           ذخیره
         </Button>
       </div>
-    </Form>
+    </form>
   );
 }

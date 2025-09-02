@@ -52,7 +52,7 @@ export default function History() {
       <div className="">
         {Object.entries(groupedBooks).map(([date, books]) => (
           <div key={date}>
-            <div className="pt-4 ">
+            <div className="pt-4  ">
               <Divider
                 textAlign="right"
                 className="pr-2"

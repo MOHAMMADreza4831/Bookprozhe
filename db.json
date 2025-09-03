@@ -1,24 +1,3 @@
 {
-  "books": [
-    [
-      {
-        "id": 1,
-        "title": "Clean Code",
-        "image": "https://example.com/cleancode.jpg",
-        "connection": 1
-      },
-      {
-        "id": 2,
-        "title": "The Pragmatic Programmer",
-        "image": "https://example.com/pragmatic.jpg",
-        "connection": 2
-      },
-      {
-        "id": 3,
-        "title": "JavaScript: The Good Parts",
-        "image": "https://example.com/js-good.jpg",
-        "connection": 1
-      }
-    ]
-  ]
+  "basket": []
 }

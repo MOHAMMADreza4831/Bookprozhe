@@ -17,11 +17,9 @@ export default function Addcard({ book }: Props) {
   };
   return (
     <div className="flex justify-between  " style={{ height: "100%" }}>
-      
       <button
-        onClick={()=> handleClick()}
-        className="rounded-full flex 
-         items-center  justify-center   "
+        onClick={() => handleClick()}
+        className="rounded-full w-8 h-8 flex items-center justify-center border-2 border-dotted border-[#1f5566]"
         style={{
           backgroundColor: "#95BCCC",
           opacity: "0.5",
@@ -29,12 +27,12 @@ export default function Addcard({ book }: Props) {
       >
         {exist ? (
           <ShoppingCartIcon
-            className="w-[16px] "
+            className="w-[16px]  border-2 border-dotted border-black"
             sx={{ color: "#1f5566", opacity: "1" }}
           />
         ) : (
           <LocalGroceryStoreOutlinedIcon
-            className="w-[20px] "
+            className="w-6 h-6"
             sx={{ color: "#1f5566", opacity: "1" }}
           />
         )}

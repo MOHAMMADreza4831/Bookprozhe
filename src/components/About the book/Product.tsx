@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Box, Button, Divider, Rating } from "@mui/material";
+import { Box, Divider, Rating } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -16,14 +16,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Book } from "../Data/interfaceDATA";
 import ModalBUY from "./modalbuy";
+import axioshandel from "../login/header";
 
 export default function AboutHistoricalBook() {
   const [book, setBook] = useState<Book | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("http://10.10.50.76:8002/api/books")
+    axioshandel
+      .get("/books")
       .then((res) => {
         const add = res.data.data.find((b: Book) => b.id.toString() === id);
         if (add) setBook(add);
@@ -256,13 +257,7 @@ export default function AboutHistoricalBook() {
                 <div className="flex flex-row gap-4">
                   <div>قیمت:</div>
                   <div className="flex flex-row gap-1">
-                    {book.files
-                      .filter((f) => f.status === 2)
-                      .map((f) => {
-                        return (
-                          <p key={f.id}>{Number(f.price).toLocaleString()}</p>
-                        );
-                      })}
+                  {book.files?.filter((f)=>f.status===1).map((item)=>item.price)}
                     تومان
                   </div>
                 </div>
@@ -289,7 +284,7 @@ export default function AboutHistoricalBook() {
             </div>
           </section>
 
-          <div className="">
+          <div className="px-3 py-6">
             <ModalBUY book={book} />
           </div>
           <section>

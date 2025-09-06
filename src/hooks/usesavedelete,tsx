@@ -1,0 +1,20 @@
+import axioshandel  from '../components/login/header';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+
+export  function useDeleteFromSave() {
+  const queryClient = useQueryClient();
+
+  const deleteCartItem = useMutation<unknown, Error, { id: number }>({
+    mutationFn: ({ id }) => axioshandel.delete(`/collection-items/${id}`),
+    onSuccess: () => {
+      toast.success("با موفقیت حذف شد 🗑️");
+      queryClient.invalidateQueries({ queryKey: ["save"] });
+    },
+    onError: () => {
+      toast.error("خطا در حذف ❌");
+    },
+  });
+
+  return deleteCartItem;
+}

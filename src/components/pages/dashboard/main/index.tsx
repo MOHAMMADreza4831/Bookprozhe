@@ -1,11 +1,11 @@
-import { X } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { Book } from "@src/components/Data/interfaceDATA";
 import axioshandel from "@src/components/login/header";
 import { PATH_DASHBOARD } from "@src/routes/paths";
 import { useQuery } from "@tanstack/react-query";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button_index from "./button_index";
 
 type datatype = {
   book_id: string;
@@ -13,34 +13,12 @@ type datatype = {
 };
 
 function Download() {
-  const handleDownload = (data: datatype) => {
-    console.log(data);
-    console.log("salam");
-    axioshandel
-      .post("/book-order/download", {
-        book_id: data.book_id.toString,
-        file_id: data.file_id,
-      })
-
-      .then((res) => {
-        const fileUrl = res?.data?.fileUrl;
-        if (fileUrl) {
-          window.open(fileUrl, "_blank"); // باز شدن در تب جدید
-        } else {
-          console.error("❌ fileUrl تعریف نشده");
-        }
-      })
-      .catch((err) => {
-        console.error("دانلود موفق نبود", err);
-      });
-  };
-
   const {
     data: books,
     isLoading,
     isError,
   } = useQuery<Book[]>({
-    queryKey: ["books"],
+    queryKey: ["downlod"],
     queryFn: () => axioshandel.get("/book-order").then((res) => res.data.data),
   });
   console.log(books);
@@ -68,6 +46,7 @@ function Download() {
       </div>
       <div className="flex flex-col pt-10">
         {books?.map((item) => (
+          
           <div
             key={item.id}
             className="grid grid-cols-[1fr,3fr]  my-3 h-[150px] gap-2 shadow-lg mx-5  rounded-b-2xl"
@@ -96,20 +75,8 @@ function Download() {
               </div>
               <div>نویسنده:{item.author}</div>
               <div>قیمت : 220 تومان </div>
-              <div className="flex justify-center gap-3 pt-5">
-                <Button
-                  onClick={() => handleDownload(item)}
-                  sx={{ backgroundColor: "#95BCCC", color: "white" }}
-                  className="w-3/6"
-                >
-                  مشاهده کتاب{" "}
-                </Button>
-                <Button
-                  sx={{ backgroundColor: "#DD7475", color: "white" }}
-                  className="w-3/6"
-                >
-                  مشاهده ترجمه
-                </Button>
+              <div className="flex w-full    justify-center gap-3 ">ّ
+                <Button_index item={item} />
               </div>
             </div>
           </div>

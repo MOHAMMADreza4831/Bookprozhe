@@ -5,6 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import axioshandel from "@src/components/login/header";
+import { PATH_DASHBOARD } from "@src/routes/paths";
 type datatype = {
   id: number;
   first_name: string;
@@ -35,7 +36,7 @@ export default function Profilemain() {
       >
         <div className="flex      py-4 ">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => navigate( PATH_DASHBOARD.navigator.home)}
             style={{ color: "white" }}
             className="font-bold flex "
           >

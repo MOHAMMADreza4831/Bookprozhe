@@ -43,7 +43,6 @@ function HistoricalCard() {
     queryKey: ["books"],
     queryFn: () => axioshandel.get("/books").then((res) => res.data.data),
   });
-
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;
 

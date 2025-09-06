@@ -1,39 +1,45 @@
 import { Box, Card, CardMedia } from "@mui/material";
-import Buttonicone from "@src/components/buttonIcone/buttonsicone";
 import Rating from "@src/components/buttonIcone/Raring";
 import { Book } from "@src/components/Data/interfaceDATA";
 import axioshandel from "@src/components/login/header";
-import { useQuery } from "@tanstack/react-query";
+import queryClient from "@src/utils/queryClient";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { IoHeartDislikeSharp } from "react-icons/io5";
+
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-type datatype = { 
-    book:Book
-}
-
-export default function Favorites({book}:datatype) {
+export default function Favorites(book: Book) {
   const navigate = useNavigate();
 
+  const deleteCartItem = useMutation<unknown, Error, { id: number }>({
+    mutationFn: ({ id }) => axioshandel.delete(`/collection-items/${id}`),
+    onSuccess: () => {
+      toast.success("کارت با موفقیت پاک شد");
+      queryClient.invalidateQueries({ queryKey: ["love"] });
+    },
+    onError: () => {
+      toast.error("عملیات پاک کردن از سبد خرید ناموفق بود");
+    },
+  });
   const {
-    data: favorites,
+    data: love,
     isLoading,
     isError,
   } = useQuery<Book[]>({
-    queryKey: ["basket"],
+    queryKey: ["love"],
     queryFn: () =>
       axioshandel
         .get("/collection-items/علاقه مندی ها  ")
         .then((res) => res.data.data),
-  });   
-  console.log(favorites);
+  });
+  const filteredSave = love?.filter(
+    (item) => item.ref !== null && item.id !== book.id
+  );
 
-  const filtersave = favorites?.flat().map((item) => item.ref);
-  console.log(filtersave, "salam");
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;
-
-//   const test: Book[] = Data.flat().filter((item) => item.connection === 1);
-
   return (
     <>
       <div
@@ -55,26 +61,33 @@ export default function Favorites({book}:datatype) {
         </div>
       </div>
       <div className="flex flex-wrap gap-4 pt-10 justify-start pr-4">
-        {filtersave?.map((book:Book) => (
-          <div  key={book.id} className="flex-shrink-0  w-[200px] h-[300px] ">
+        {filteredSave?.map((book: Book) => (
+          <div className="flex-shrink-0  w-[200px] h-[300px] ">
             <Card style={{ borderRadius: "0 0 10px 10px" }} className=" ">
-              <Link to={`/dashboard/book/${book.ref.id}`}>
+              <Link to={`/dashboard/book/${book.id}`} key={book.id}>
                 <CardMedia
                   component="img"
-                  image={book.image}
-                  alt={book.title}
-                  className=" h-48  mb-14 object-top z-10  overflow-visible  "
+                  image={book.ref.picture}
+                  alt={book.ref.title}
+                  className=" h-48  mb-14 object-top z-10  overflow-clip  "
                 />
               </Link>
               <div className=" bg-white  " style={{ opacity: 0.8 }}>
                 <div>{book.title}</div>
-                <Box className=" flex justify-between  w-[180px] ">
-                  <Buttonicone book={book} />
+                <div className=" flex justify-between rounded-sm items-center  w-[180px] ">
+                  <button
+                    onClick={() => deleteCartItem.mutate({ id: book.id })}
+                    className="w-[100px] h-[30px] bg-[#dd7475]"
+                  >
+                    <IoHeartDislikeSharp
+                      className=""
+                      style={{ color: "#790006" }}
+                    />
+                  </button>
                   <Box className="flex  items-center gap-1">
-                    ` {/* <Rating rating={book.rate} /> */}
-                    {/* `                  <p>{book.rate}</p>{" "} */}
+                    <Rating rating={book.ref.rate} /> <p>{book.ref.rate}</p>
                   </Box>
-                </Box>
+                </div>
               </div>
             </Card>
           </div>

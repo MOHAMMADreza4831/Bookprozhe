@@ -1,36 +1,41 @@
-// import { useState, useEffect } from "react";
-// import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-// import BookmarkIcon from "@mui/icons-material/Bookmark";
-// import { Book } from "../Data/interfaceDATA";
-// // import { useSavestatus } from "@src/hooks/usestatesave";
+import { useState, useEffect } from "react";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import { Book } from "../Data/interfaceDATA";
+import { useSavestatus } from "@src/hooks/useSavestatus";
 
-// type Props = {
-//   book: Book;
-// };
+type Props = {
+  book: Book;
+};
 
-// export default function SaveIcon({ book }: Props) {
-//   // const { handleSubmit, isSaved } = useSavestatus(book); 
-//   // const [exist, setExist] = useState(isSaved);
+export default function SaveIcon({ book }: Props) {
+  const { handleSubmit, isSaved } = useSavestatus(book);
 
-//   const handleClick = () => {
-//     handleSubmit();
-//     setExist((prev) => !prev);
-//   };
+  const [exist, setExist] = useState(isSaved);
 
-//   useEffect(() => {
-//     setExist(isSaved);
-//   }, [isSaved]);
+  const handleClick = () => {
+    handleSubmit();
+    setExist((prev) => !prev);
+  };
 
-//   return (
-//     <div className="flex justify-center">
-//       <div
-//         className="w-7 h-7 flex justify-center items-center rounded-full"
-//         style={{ backgroundColor: "#FCDCDCCC" }}
-//       >
-//         <button className="flex items-center" onClick={handleClick}>
-//           {exist ? <BookmarkIcon sx={{color:"#DD7475"}} /> : <BookmarkBorderIcon sx={{color:"#DD7475"}} />}
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
+  useEffect(() => {
+    setExist(isSaved);
+  }, [isSaved]);
+
+  return (
+    <div className="flex justify-center">
+      <div
+        className="w-7 h-7 flex justify-center items-center rounded-full"
+        style={{ backgroundColor: "#FCDCDCCC" }}
+      >
+        <button className="flex items-center" onClick={handleClick}>
+          {exist ? (
+            <BookmarkIcon sx={{ color: "#DD7475" }} />
+          ) : (
+            <BookmarkBorderIcon sx={{ color: "#DD7475" }} />
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}

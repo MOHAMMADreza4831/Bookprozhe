@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Box, Divider, Rating } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -9,14 +9,13 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import { LiaCalendar } from "react-icons/lia";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-import Iconeproduct from "./Iconeproduct";
 import { PiBaby } from "react-icons/pi";
 import { GiEarthAmerica } from "react-icons/gi";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Book } from "../Data/interfaceDATA";
-import ModalBUY from "./modalbuy";
 import axioshandel from "../login/header";
+import Buttonstatus1 from "./Buttenstatus1";
+import Buttonstatus2 from "./Buttonestatus2";
 
 export default function AboutHistoricalBook() {
   const [book, setBook] = useState<Book | null>(null);
@@ -233,9 +232,8 @@ export default function AboutHistoricalBook() {
                 direction: "ltr",
               }}
             >
-              <Iconeproduct />
-
-              <Rating
+              {/* <Iconeproduct /> */}
+              {/* <Rating
                 size="small"
                 className="flex flex-row-reverse"
                 precision={0.5}
@@ -245,7 +243,7 @@ export default function AboutHistoricalBook() {
                 sx={{
                   direction: "ltr",
                 }}
-              />
+              /> */}
               <div
                 className="  flex gap- flex-row justify-center items-center  p-3"
                 style={{
@@ -285,8 +283,10 @@ export default function AboutHistoricalBook() {
           </section>
 
           <div className="px-3 py-6">
-            <ModalBUY book={book} />
+
+                <Buttonstatus1 book={book} /> 
           </div>
+                <Buttonstatus2 book={book} /> 
           <section>
             <div>
               <Divider

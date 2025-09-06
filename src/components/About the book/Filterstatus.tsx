@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-
 import { Book } from "../Data/interfaceDATA";
 import axioshandel from "../login/header";
 import { useEffect } from "react";
@@ -60,20 +59,16 @@ export function useFiltersatus(book: Book | undefined, statuses: number[]) {
         description: "  ",
       });
     }
- 
-        const deleteCartItemData = basket?.find(
-          (item) =>book.files?.some((file) => file.status === item.file.status)
-        );
+
+    const deleteCartItemData = basket?.find(
+      (item) => book?.files?.some((file) => file.id === item.file.id) 
+    );
     if (deleteCartItemData) {
       deleteCartItem.mutate({ file_id: deleteCartItemData.file_id });
     }
   };
   useEffect(() => {
-    if (basket) {
-      localStorage.setItem("basket", JSON.stringify(basket));
-    }else { 
-      localStorage.removeItem("basket")
-    }
+    localStorage.setItem("basket", JSON.stringify(basket));
   }, [basket]);
 
   return { handleSubmit };

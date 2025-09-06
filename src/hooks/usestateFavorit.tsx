@@ -10,12 +10,12 @@ type datasubmit = {
   ref_title: string;
 };
 
-export function usefaverit(book: Book) {
+export function Usefaverit (book: Book) {
   const { data: love } = useQuery<Book[]>({
     queryKey: ["love"],
     queryFn: () =>
       axioshandel
-        .get("/collection-items/علاقه مندی ها ")
+        .get("/collection-items/علاقه مندی ها")
         .then((res) => res.data.data),
   });
   const queryClient = useQueryClient();
@@ -33,8 +33,9 @@ export function usefaverit(book: Book) {
     },
   });
 
-  const addCartMutation = useMutation   <unknown, Error, datasubmit>({
-    mutationFn: (newCart) => axioshandel.post("/collection-items", newCart),
+  const addCartMutation = useMutation<unknown, Error, datasubmit>({
+    mutationFn: (newCart) =>
+      axioshandel.post("/collection-items", newCart),
     onSuccess: () => {
       toast.success("کارت با موفقیت اضافه شد");
       queryClient.invalidateQueries({ queryKey: ["love"] });
@@ -51,8 +52,8 @@ export function usefaverit(book: Book) {
 
     if (!exist) {
       addCartMutation.mutate({
-        collection: "نشان شده ها",
-        ref_type: "love",
+        collection: "علاقه مندی ها",
+        ref_type: "loved",
         ref_id: book.id,
         ref_title: book.title,
       });
@@ -65,8 +66,8 @@ export function usefaverit(book: Book) {
     if (love) {
       localStorage.setItem("love", JSON.stringify(love));
     } else {
-      localStorage.removeItem("save");
-    }
+    localStorage.removeItem("love"); }
+    
   }, [love]);
 
   return { handleSubmit, isSaved };

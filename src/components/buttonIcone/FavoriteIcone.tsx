@@ -1,62 +1,38 @@
 import { FavoriteBorder } from "@mui/icons-material";
-import axioshandel from "../login/header";
 import { Book } from "../Data/interfaceDATA";
+import { FaHeart } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { Usefaverit } from "@src/hooks/usestateFavorit";
 
 type FavoriteIconProps = {
   book: Book;
 };
+export default function Favoritesicone({ book }: FavoriteIconProps) {
+  const { handleSubmit, isSaved } = Usefaverit(book);
 
-export default function FavoriteIcon({ book }: FavoriteIconProps) {
-  const [liked, setLiked] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
+  const [exist, setExist] = useState(isSaved);
 
-  const fetchSavedStatus = async () => {
-    try {
-      const res = await axioshandel.get("/collection-items/نشان شده ها");
-      const items = res.data.data || [];
-      const exists = items.some((item: any) => item.id === book.id);
-      setIsSaved(exists);
-      setLiked(exists);
-    } catch (err) {
-      console.log(err);
-    }
+  const handleClick = () => {
+    handleSubmit();
+    setExist((prev) => !prev);
   };
 
   useEffect(() => {
-    fetchSavedStatus();
-  }, []);
-
-  const handleSubmit = async () => {
-    try {
-      if (isSaved) {
-        console.log("این کتاب قبلاً ذخیره شده است.");
-        return;
-      }
-
-      const res = await axioshandel.post("/collection-items", {
-        collection: "1",
-        ref_type: "loved",
-        ref_id: book.id,
-      });
-      console.log( book.id);
-      
-      console.log(res);
-      setLiked(true);
-      setIsSaved(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    setExist(isSaved);
+  }, [isSaved]);
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <div
-        className="w-7 h-7 rounded-full flex justify-center"
+        className="w-7 h-7 flex justify-center items-center rounded-full"
         style={{ backgroundColor: "#FCDCDCCC" }}
       >
-        <button onClick={handleSubmit} className="flex items-center">
-          <FavoriteBorder sx={{ color: liked ? "#DD0000" : "#DD7475" }} />
+        <button className="flex items-center" onClick={handleClick}>
+          {exist ? (
+            <FaHeart style={{ color: "#DD7475" }} />
+          ) : (
+            <FavoriteBorder sx={{ color: "#DD7475" }} />
+          )}
         </button>
       </div>
     </div>

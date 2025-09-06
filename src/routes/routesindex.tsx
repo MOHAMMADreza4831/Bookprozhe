@@ -48,10 +48,10 @@ const NotFound = () => {
 };
 
 export const routes: RouteObject[] = [
-  // {
-  //   index: true,
-  //   element: <Splashscrean />,
-  // },
+  {
+    index: true,
+    element: <Splashscrean />,
+  },
   {
     path: "/auth",
     element: <AuthLayout />,
@@ -60,10 +60,10 @@ export const routes: RouteObject[] = [
       //   index: true,
       //   element: <Navigate to={PATH_AUTH.login} replace />,
       // },
-      // {
-      //   path: "login",
-      //   element: <Login1 />,
-      // },
+      {
+        path: "login",
+        element: <Login1 />,
+      },
       // {
       //   path: "dashboard/category/:type",
       //   element: <BooksCategoryDashboardPage />,
@@ -107,7 +107,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: "favorites",
-        element: <Favorites />,
+        element: <Favorites  />,
       },
       {
         path: "products/newbook/:pageNumber",

@@ -19,8 +19,9 @@ export function useSavestatus(book: Book) {
         .then((res) => res.data.data),
   });
   const queryClient = useQueryClient();
-
-  const isSaved = !!save?.find((item) => item.ref_id === book.id);
+if (book) {
+}
+  const isSaved = !!save?.find((item) => item.ref_id === book?.id);
 
   const deleteCartItem = useMutation<unknown, Error, { id: number }>({
     mutationFn: ({ id }) => axioshandel.delete(`/collection-items/${id}`),

@@ -16,6 +16,9 @@ import { Book } from "../Data/interfaceDATA";
 import axioshandel from "../login/header";
 import Buttonstatus1 from "./Buttenstatus1";
 import Buttonstatus2 from "./Buttonestatus2";
+import SaveIcon from "../buttonIcone/Saveicone";
+import Favoritesicone from "../buttonIcone/FavoriteIcone";
+import Ratingproduct from "./Ratingproduct";
 
 export default function AboutHistoricalBook() {
   const [book, setBook] = useState<Book | null>(null);
@@ -224,26 +227,15 @@ export default function AboutHistoricalBook() {
         </div>
       </header>
       <section className="">
-        <div>
+        <div className="">
+          
           <Box className=" felx flex-row">
-            <Box
-              className=" flex flex-row items-center  gap-10 pr-3 "
-              sx={{
-                direction: "ltr",
-              }}
-            >
-              {/* <Iconeproduct /> */}
-              {/* <Rating
-                size="small"
-                className="flex flex-row-reverse"
-                precision={0.5}
-                name="read-only"
-                value={book.rate}
-                readOnly
-                sx={{
-                  direction: "ltr",
-                }}
-              /> */}
+            <Box>
+              <Ratingproduct book={book} />
+            </Box>
+            <Box className=" flex flex-row items-center  gap-2 pr-3 ">
+              <SaveIcon book={book} />
+              <Favoritesicone book={book} />
               <div
                 className="  flex gap- flex-row justify-center items-center  p-3"
                 style={{
@@ -255,7 +247,9 @@ export default function AboutHistoricalBook() {
                 <div className="flex flex-row gap-4">
                   <div>قیمت:</div>
                   <div className="flex flex-row gap-1">
-                  {book.files?.filter((f)=>f.status===1).map((item)=>item.price)}
+                    {book.files
+                      ?.filter((f) => f.status === 1)
+                      .map((item) => item.price)}
                     تومان
                   </div>
                 </div>
@@ -282,11 +276,10 @@ export default function AboutHistoricalBook() {
             </div>
           </section>
 
-          <div className="px-3 py-6">
-
-                <Buttonstatus1 book={book} /> 
+          <div className="  flex justify-around px-4 py-6">
+            <Buttonstatus1 book={book} />
+            <Buttonstatus2 book={book} />
           </div>
-                <Buttonstatus2 book={book} /> 
           <section>
             <div>
               <Divider

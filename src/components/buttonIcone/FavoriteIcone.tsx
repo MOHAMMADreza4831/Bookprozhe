@@ -24,14 +24,14 @@ export default function Favoritesicone({ book }: FavoriteIconProps) {
   return (
     <div className="flex justify-center">
       <div
-        className="w-7 h-7 flex justify-center items-center rounded-full"
+        className="w-7 h-7 rounded-full flex items-center justify-center border-2 border-dotted border-[#DD7475]"
         style={{ backgroundColor: "#FCDCDCCC" }}
       >
         <button className="flex items-center" onClick={handleClick}>
           {exist ? (
-            <FaHeart style={{ color: "#DD7475" }} />
+            <FaHeart className="w-4 h-4" style={{ color: "#DD7475" }} />
           ) : (
-            <FavoriteBorder sx={{ color: "#DD7475" }} />
+            <FavoriteBorder className="w-4 h-4" sx={{ color: "#DD7475" }} />
           )}
         </button>
       </div>

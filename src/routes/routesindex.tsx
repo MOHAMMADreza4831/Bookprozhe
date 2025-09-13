@@ -29,6 +29,7 @@ import Favorites from "@src/components/pages/Collection/Favorites";
 import SaveCart from "@src/components/pages/Collection/SaveCart";
 import Splashscrean from "@src/components/login/splashscrean";
 import Login1 from "@src/components/login/login1";
+import ProductList from "@src/hooks/ProductList";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -103,16 +104,21 @@ export const routes: RouteObject[] = [
       },
       {
         path: "savecard",
-        element: <SaveCart  />,
+        element: <SaveCart />,
       },
       {
         path: "favorites",
-        element: <Favorites  />,
+        element: <Favorites />,
       },
+      // {
+      //   path: "products/newbook/:pageNumber",
+      //   element: <ProductsPage />,
+      // },
       {
-        path: "products/newbook/:pageNumber",
-        element: <ProductsPage />,
+        path: "products/:category/:page",
+        element: <ProductList />,
       },
+
       {
         path: "product/:id ",
       },

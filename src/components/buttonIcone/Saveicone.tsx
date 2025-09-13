@@ -25,14 +25,19 @@ export default function SaveIcon({ book }: Props) {
   return (
     <div className="flex justify-center">
       <div
-        className="w-7 h-7 flex justify-center items-center rounded-full"
-        style={{ backgroundColor: "#FCDCDCCC" }}
+        className="w-7 h-7 rounded-full flex items-center justify-center border-2 border-dotted border-[#1f5566]"
+           style={{
+          backgroundColor: "#95BCCC",
+          opacity: "0.5",
+          width: "25px",
+          height: "25px",
+        }}
       >
         <button className="flex items-center" onClick={handleClick}>
           {exist ? (
-            <BookmarkIcon sx={{ color: "#DD7475" }} />
+            <BookmarkIcon className="w-4 h-4" sx={{ color: "#1f5566" }} />
           ) : (
-            <BookmarkBorderIcon sx={{ color: "#DD7475" }} />
+            <BookmarkBorderIcon className="w-4 h-4" sx={{ color: "#1f5566" }} />
           )}
         </button>
       </div>

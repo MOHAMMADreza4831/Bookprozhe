@@ -21,7 +21,6 @@ function Download() {
     queryKey: ["downlod"],
     queryFn: () => axioshandel.get("/book-order").then((res) => res.data.data),
   });
-  console.log(books);
 
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;

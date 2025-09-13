@@ -18,7 +18,6 @@ export default function Shop() {
     queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
   });
 
-  console.log(basket)
   
   const addToBasket = useMutation({
     
@@ -104,6 +103,8 @@ export default function Shop() {
                   <div>
                     قیمت:
                     {book.file?.status === 0 ? book.file.price : null}
+                    {book.file?.status === 2 ? book.file.price : null}
+                    {book.file?.status === 1 ? book.file.price : null}
                   </div>
                 </div>
               </div>

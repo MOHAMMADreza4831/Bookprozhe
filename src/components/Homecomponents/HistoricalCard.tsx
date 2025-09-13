@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import axioshandel from "../login/header";
 import { PATH_BOOKS } from "@src/routes/paths";
 import Buttonicone from "../buttonIcone/buttonsicone";
-import Rating from "../buttonIcone/Raring";
+import Rating from "../buttonIcone/Rating";
 
 function HistoricalCard() {
   // const [books, setbooks] = useState<Book[]>([]);
@@ -26,7 +26,6 @@ function HistoricalCard() {
   //     })
 
   //     .catch((error) => {
-  //       console.log("خطا در دریافت  اطلاعات", error);
   //       alert("خطا در دریافت  اطلاعات");
   //     });
   // }, []);

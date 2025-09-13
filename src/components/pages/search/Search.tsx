@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import Buttonicone from "@src/components/buttonIcone/buttonsicone";
-import Rating from "@src/components/buttonIcone/Raring";
+import Rating from "@src/components/buttonIcone/Rating";
 import { Book } from "@src/components/Data/interfaceDATA";
 import { PATH_BOOKS } from "@src/routes/paths";
 import axios from "axios";

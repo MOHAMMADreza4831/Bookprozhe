@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Book } from "../Data/interfaceDATA";
 import axioshandel from "../login/header";
 import { PATH_BOOKS } from "@src/routes/paths";
-import Rating from "../buttonIcone/Raring";
+import Rating from "../buttonIcone/Rating";
 import Buttonicone from "../buttonIcone/buttonsicone";
 
 function NewCard() {
@@ -18,7 +18,6 @@ function NewCard() {
     queryKey: ["books"],
     queryFn: () => axioshandel.get("/books").then((res) => res.data.data),
   });
-
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;
 

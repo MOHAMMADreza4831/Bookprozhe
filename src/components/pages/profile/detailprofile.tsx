@@ -25,7 +25,6 @@ export default function Detailprofile() {
       setData([res.data.data]);
     });
   }, []);
-  console.log(Data);
 
   return (
     <>

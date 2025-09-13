@@ -6,7 +6,7 @@ import { Box, Card, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { PATH_BOOKS } from "@src/routes/paths";
 import Buttonicone from "@src/components/buttonIcone/buttonsicone";
-import Rating from "@src/components/buttonIcone/Raring";
+import Rating from "@src/components/buttonIcone/Rating";
 import axios from "axios";
 
 export default function Specialoffer() {

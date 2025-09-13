@@ -1,52 +1,41 @@
-import { Box, CardMedia, Typography } from "@mui/material";
+import { Box, CardMedia, Typography, Card } from "@mui/material";
 import { FC } from "react";
-import StarIcon from "@mui/icons-material/Star";
-import { Card } from "@mui/material";
 import { Link } from "react-router-dom";
 import Buttonicone from "../buttonIcone/buttonsicone";
+import Rating from "../buttonIcone/Rating";
 import { Book } from "./interfaceDATA";
+import { PATH_BOOKS } from "@src/routes/paths";
 
-type datatype ={ 
-  book:Book
-  title:string
-  image:string
-  rating:number
-  id:number
+interface ProductCardProps {
+  book: Book;
+  title?: string; 
+  image?: string; 
+  rating?: number; 
+  id?: number;
 }
-
-
-interface ProductCardProps extends Book {
-    book:Book
-  title:string
-  image:string
-  rating:number
-  id:number
-}
-
-const ProductCard: FC<ProductCardProps> = ({ title, image, rating, id ,book  }:datatype) => {
+const ProductCard: FC<ProductCardProps> = ({ book }) => {
   return (
-    <Box className=" ">
-      <Card className="flex-shrink-0  w-[200px] h-[300px] gap-3 ">
-        <Link to={`/dashboard/book/${id}`} key={id}>
+    <Box className="flex-shrink-0 w-[200px] h-[300px] gap-11">
+      <Card>
+        <Link to={PATH_BOOKS.navigator.details(book?.id)}>
           <CardMedia
             component="img"
-            image={image}
-            alt={title}
+            image={book?.picture}
+            alt={book?.title}
             className="w-full h-48 object-contain"
           />
         </Link>
 
         <Box className="flex flex-col">
           <Typography variant="h6" className="w-40">
-            {title}
+            {book?.title}
           </Typography>
 
-          <Box className="flex justify-around ">
-
-                <Buttonicone book={book} />
+          <Box className="flex justify-between m-2">
+            <Buttonicone book={book} />
             <Box className="flex items-center gap-1">
-              <StarIcon fontSize="small" sx={{ color: "yellow" }} />
-              <span className="">{rating}</span>
+              <Rating rating={book?.rate} />
+              <p>{book?.rate}</p>
             </Box>
           </Box>
         </Box>

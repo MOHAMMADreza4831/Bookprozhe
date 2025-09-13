@@ -7,7 +7,7 @@ import { Divider } from "@mui/material";
 
 import { Link,  } from "react-router-dom";
 import { Book } from "@src/components/Data/interfaceDATA";
-import Rating from "@src/components/buttonIcone/Raring";
+import Rating from "@src/components/buttonIcone/Rating";
 
 export default function History() {
   // const Navigate = useNavigate();
@@ -21,13 +21,11 @@ export default function History() {
     queryFn: () => axioshandel.get("/book-order").then((res) => res.data.data),
   });
 
-  console.log(books, "ali");
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (isError) return <p>خطا در بارگذاری: {(error as Error).message}</p>;
   if (!books || books.length === 0) return <p>کتابی موجود نیست</p>;
 
   const groupedBooks = groupBooksByDate(books);
-  console.log(groupedBooks);
 
   return (
     <>

@@ -23,7 +23,6 @@ export default function MenuHome() {
   
   const handellogout = () => { 
     localStorage.removeItem("token")
-    console.log("login")
     Navigate("/auth/login")
   }
 

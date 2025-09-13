@@ -33,7 +33,6 @@ export default function EditProfile() {
   const [datadate, setdatadate] = React.useState<DateObject | null>(null);
   const [avatarFile, setAvatarFile] = React.useState<File | null>(null);
 
-  console.log(datadate);
 
   const {
     register,
@@ -95,7 +94,6 @@ const handeladdavatar = (event: React.ChangeEvent<HTMLInputElement>) => {
       "birth_date",
       datadate ? datadate.format("YYYY-MM-DD") : ""
     );
-    console.log(formData);
     if (avatarFile) {
       formData.append("image",avatarFile);
     }

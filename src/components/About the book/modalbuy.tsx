@@ -19,8 +19,6 @@
 
 //   const { handleSubmit: handleSubmit1 } = useFiltersatus(book, [1]);
 //   const { handleSubmit: handleSubmit2 } = useFiltersatus2(book, [0]);
-//   console.log(handleSubmit1)
-//   console.log(handleSubmit2)
 //   return (
 //     <>
 //       <Button

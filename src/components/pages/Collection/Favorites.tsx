@@ -1,5 +1,5 @@
 import { Box, Card, CardMedia } from "@mui/material";
-import Rating from "@src/components/buttonIcone/Raring";
+import Rating from "@src/components/buttonIcone/Rating";
 import { Book } from "@src/components/Data/interfaceDATA";
 import axioshandel from "@src/components/login/header";
 import queryClient from "@src/utils/queryClient";
@@ -64,7 +64,7 @@ export default function Favorites(book: Book) {
         {filteredSave?.map((book: Book) => (
           <div className="flex-shrink-0  w-[200px] h-[300px] ">
             <Card style={{ borderRadius: "0 0 10px 10px" }} className=" ">
-              <Link to={`/dashboard/book/${book.id}`} key={book.id}>
+              <Link to={`/dashboard/book/${book.ref_id}`} key={book.id}>
                 <CardMedia
                   component="img"
                   image={book.ref.picture}

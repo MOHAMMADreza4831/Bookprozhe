@@ -20,7 +20,7 @@ export function Usefaverit (book: Book) {
   });
   const queryClient = useQueryClient();
 
-  const isSaved = !!love?.find((item) => item.ref_id === book.id);
+  const isSaved = !!love?.find((item) => item.ref_id === book?.id);
 
   const deleteCartItem = useMutation<unknown, Error, { id: number }>({
     mutationFn: ({ id }) => axioshandel.delete(`/collection-items/${id}`),

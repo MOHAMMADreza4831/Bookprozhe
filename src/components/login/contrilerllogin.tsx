@@ -23,7 +23,6 @@ export default function LoginForm() {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
 
   };
 

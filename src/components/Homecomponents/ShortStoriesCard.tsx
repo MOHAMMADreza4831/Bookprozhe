@@ -10,7 +10,7 @@ import { Book } from "../Data/interfaceDATA";
 import { useQuery } from "@tanstack/react-query";
 import axioshandel from "../login/header";
 import { PATH_BOOKS } from "@src/routes/paths";
-import Rating from "../buttonIcone/Raring";
+import Rating from "../buttonIcone/Rating";
 import Buttonicone from "../buttonIcone/buttonsicone";
 function ShortStoriesCard() {
 

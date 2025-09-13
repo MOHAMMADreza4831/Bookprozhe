@@ -13,8 +13,29 @@ const Home = () => {
     queryClient.invalidateQueries({ queryKey: ["basket1"] });
     queryClient.invalidateQueries({ queryKey: ["basket2"] });
     queryClient.invalidateQueries({ queryKey: ["basket3"] });
-    console.log("salam basket ")
   }, []);
+  const categories = [
+    {
+      name: "جدیدترین‌ها",
+      path: "/products/newbook",
+      component: NewCard,
+    },
+    {
+      name: "کتاب‌های تاریخی",
+      path: "/products/historicalbook",
+      component: HistoricalCard,
+    },
+    {
+      name: "کتاب‌های رمان",
+      path: "/products/roman",
+      component: RomanCard,
+    },
+    {
+      name: "داستان‌های کوتاه",
+      path: "/products/shortstory",
+      component: ShortStoriesCard,
+    },
+  ];
 
   return (
     <>
@@ -31,12 +52,7 @@ const Home = () => {
               }}
             >
               <h1 className="font-bold">جدید ترین ها </h1>
-              <Link
-                to="/products/newbook/1"
-                style={{ color: "rgba(149, 165, 166,1.0)" }}
-              >
-                موارد بیشتر
-              </Link>
+              <Link to={`/products/newbook/1`}>موارد بیشتر</Link>
             </div>
 
             <NewCard />
@@ -50,13 +66,7 @@ const Home = () => {
             }}
           >
             <h1 className="font-bold">کتاب های تاریخی</h1>
-
-            <Link
-              to="/products/historicalbook/1"
-              style={{ color: "rgba(149, 165, 166,1.0)" }}
-            >
-              موارد بیشتر
-            </Link>
+            <Link to={`/products/historicalbook/1`}>موارد بیشتر</Link>
           </div>
 
           <HistoricalCard />
@@ -70,12 +80,7 @@ const Home = () => {
             }}
           >
             <h1 className="font-bold">کتاب های رمان</h1>
-            <Link
-              to="/products/newbook/1"
-              style={{ color: "rgba(149, 165, 166,1.0)" }}
-            >
-              موارد بیشتر
-            </Link>
+            <Link to={`/products/roman/1`}>موارد بیشتر</Link>{" "}
           </div>
 
           <RomanCard />
@@ -89,12 +94,7 @@ const Home = () => {
             }}
           >
             <h1 className="font-bold">داستان های کوتاه</h1>
-            <Link
-              to="/products/newbook/1"
-              style={{ color: "rgba(149, 165, 166,1.0)" }}
-            >
-              موارد بیشتر
-            </Link>
+            <Link to={`/products/shortstory/1`}>موارد بیشتر</Link>
           </div>
           <ShortStoriesCard />
         </div>

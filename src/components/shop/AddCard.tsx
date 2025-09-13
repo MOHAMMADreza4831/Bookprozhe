@@ -17,17 +17,13 @@ type Props = {
 };
 
 export default function Addcard({ book }: Props) {
-
   const queryinvalid = useQueryClient();
-
   const { data: basket } = useQuery<Book[]>({
-    queryKey: ["basket3"],
+    queryKey: ["basket"],
     queryFn: () => axioshandel.get("/basket").then((res) => res.data.data),
-    refetchOnMount: "always",
   });
-  console.log(basket,"basket")
   const exist =
-    Array.isArray(basket) && basket.some((item) => item.book_id === book.id);
+    Array.isArray(basket) && basket.some((item) => item.book_id === book?.id);
 
   const addcartMutation = useMutation<datasubmit, Error, datasubmit>({
     mutationFn: (newcart: datasubmit) => {
@@ -36,7 +32,6 @@ export default function Addcard({ book }: Props) {
 
     onSuccess: () => {
       toast.success("کارت با موفقیت اضافه شد ");
-      queryinvalid.invalidateQueries({ queryKey: ["basket3"] });
       queryinvalid.invalidateQueries({ queryKey: ["basket"] });
     },
 
@@ -55,8 +50,7 @@ export default function Addcard({ book }: Props) {
     },
     onSuccess: () => {
       toast.success("کارت با موفقیت از سبد خرید پاک شد  ");
-      queryinvalid.invalidateQueries({ queryKey: ["basket3"] });
-
+      queryinvalid.invalidateQueries({ queryKey: ["basket"] });
     },
 
     onError: () => {
@@ -66,6 +60,7 @@ export default function Addcard({ book }: Props) {
   });
 
   const handelsubmit = (id: number) => {
+
     const exist =
       Array.isArray(basket) && basket.some((item) => item.book_id === book.id);
     const test = book.files.filter((item) => item.status === 2);
@@ -77,16 +72,14 @@ export default function Addcard({ book }: Props) {
         description: "",
       });
     }
-    // const deletecartitem1 = basket?.find((item) => item.book_id === item.book_id);
-    // console.log( basket?.find((item) => item.book_id === item.book_id))
 
-
-if (Array.isArray(basket) && basket.length > 0) {
-  basket.forEach(item => {
-    DeletecartItem.mutate({ file_id: item.file_id })
-  })
-}
-
+    basket?.forEach((item) => {
+      if (item.book_id === book.id) {
+        DeletecartItem.mutate({
+          file_id: item.file_id,
+        });
+      }
+    });
   };
 
   return (

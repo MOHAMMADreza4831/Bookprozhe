@@ -29,24 +29,7 @@ export default function History() {
 
   return (
     <>
-      {/* <div
-        className="sticky to flex-row z-10  w-full h-16  "
-        style={{ backgroundColor: "#95bccc" }}
-      >
-        <div className="flex      py-4 ">
-          <IoChevronBackOutline
-            style={{ color: "white" }}
-            className="  rotate-180 size-5 "
-          />
-          <button
-            onClick={() => Navigate(-1)}
-            style={{ color: "white" }}
-            className="font-bold"
-          >
-            بازگشت
-          </button>
-        </div>
-      </div> */}
+  
       <div className="">
         {Object.entries(groupedBooks).map(([date, books]) => (
           <div key={date}>

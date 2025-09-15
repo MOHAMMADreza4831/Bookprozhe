@@ -1,9 +1,9 @@
 import { Avatar, Box, Button } from "@mui/material";
 import axioshandel from "@src/components/login/header";
 import { useEffect, useState } from "react";
-import { IoChevronBackOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import DateObject from "react-date-object";
+import Back from "@src/components/ui/back/back";
 type datatype = {
   id: number;
   first_name: string;
@@ -28,24 +28,7 @@ export default function Detailprofile() {
 
   return (
     <>
-      <div
-        className="sticky to flex-row z-10  w-full h-16  "
-        style={{ backgroundColor: "#95bccc" }}
-      >
-        <div className="flex      py-4 ">
-          <button
-            onClick={() => navigate(-1)}
-            style={{ color: "white" }}
-            className="font-bold flex "
-          >
-            <IoChevronBackOutline
-              style={{ color: "white" }}
-              className="  rotate-180 size-5 "
-            />
-            بازگشت
-          </button>
-        </div>
-      </div>
+    <Back navigate={()=> navigate(-1)} title="پروفایل"/>
       <div>
         {Data.map((item) => {
           return (

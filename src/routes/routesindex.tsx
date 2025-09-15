@@ -30,6 +30,7 @@ import SaveCart from "@src/components/pages/Collection/SaveCart";
 import Splashscrean from "@src/components/login/splashscrean";
 import Login1 from "@src/components/login/login1";
 import ProductList from "@src/hooks/ProductList";
+import Register from "@src/components/login/register";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -62,6 +63,10 @@ export const routes: RouteObject[] = [
       //   element: <Navigate to={PATH_AUTH.login} replace />,
       // },
       {
+        path:"register",
+        element: <Register />
+      },
+      {
         path: "login",
         element: <Login1 />,
       },
@@ -86,6 +91,7 @@ export const routes: RouteObject[] = [
         path: PATH_BOOKS.navigator.details(),
         element: <AboutHistoricalBook />,
       },
+
       {
         path: "Shop",
         element: <Shop />,

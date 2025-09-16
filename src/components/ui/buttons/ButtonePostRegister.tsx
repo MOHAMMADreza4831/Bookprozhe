@@ -25,7 +25,7 @@ export default function ButtonPostRegister({
     setLoading(true);
     try {
       const payload = typeof data === "function" ? data() : data;
-
+      console.log(url)
       let res;
       if (payload instanceof FormData) {
         res = await axioshandel.post(url, payload, {
@@ -45,7 +45,6 @@ export default function ButtonPostRegister({
       console.log("ارسال موفق!");
     } catch (error: any) {
       const errMsg = error.status;
-      console.log(errMsg);
       if (onError) {
         onError(errMsg);
       }

@@ -5,7 +5,7 @@ import z from "zod";
 import ButtonPostRegister from "../buttons/ButtonePostRegister";
 import AvatarUpload from "./Avatar";
 import { useState } from "react";
-import { Alert } from "@mui/material";
+import { Alert, Container, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PATH_DASHBOARD } from "@src/routes/paths";
 
@@ -13,17 +13,26 @@ type Formregisterdata = {
   firstname: string;
   lastname: string;
   login: string;
+  password: string;
   image: File | null;
 };
-const emailSchema = z.object({
-  firstname: z.string().min(2, "نام خود را وارد کنیدد ").nonempty(),
-  lastname: z.string().min(3, "نام خانوادگی خود را وارد کنی").nonempty(),
-  login: z.string().nonempty(),
-  image: z.string().nullable(),
-});
+
+const emailSchema = z
+  .object({
+    firstname: z.string().min(2, "نام خود را وارد کنید").nonempty(),
+    lastname: z.string().min(3, "نام خانوادگی خود را وارد کنید").nonempty(),
+    login: z.string().nonempty(),
+    image: z.string().nullable(),
+    password: z.string().min(6, "حداقل ۶ کاراکتر"),
+    confirmPassword: z.string().min(6, "حداقل ۶ کاراکتر"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "رمز عبور و تکرار آن باید یکسان باشند",
+    path: ["confirmPassword"],
+  });
 
 export default function Formregister() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [AlertErorr, setAlertErorr] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
@@ -32,14 +41,13 @@ export default function Formregister() {
     mode: "onTouched",
     reValidateMode: "onChange",
   });
-
   const PropData = (values: Formregisterdata, file: File | null) => {
     if (file) {
       const formData = new FormData();
       formData.append("firstname", values.firstname);
       formData.append("lastname", values.lastname);
       formData.append("login", values.login);
-      console.log(formData);
+      formData.append("password", values.password);
       return formData;
     } else {
       return { ...values };
@@ -58,38 +66,54 @@ export default function Formregister() {
   };
 
   return (
-    <>
+    <Container maxWidth="sm">
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="flex justify-center pt-5">
             <AvatarUpload value={avatarFile} onChange={setAvatarFile} />
           </div>
-          <div className="flex flex-col gap-4 pt-10">
-            <FormInputs name="firstname" label="نام " type="text" />
-            <FormInputs name="lastname" label="نام خانوادگی" type="text" />
-            <FormInputs name="login" label="شماره موبایل " type="text" />
-          </div>
-          <div className="flex  justify-center px-3 py-8 ">
+          <Grid container spacing={3} className="pt-8 flex justify-center  ">
+            <Grid item xs={6} sm={12}>
+              <FormInputs name="firstname" label="نام" type="text" />
+            </Grid>
+            <Grid item xs={6} sm={12}>
+              <FormInputs name="lastname" label="نام خانوادگی" type="text" />
+            </Grid>
+            <Grid item xs={6} sm={12}>
+              <FormInputs name="login" label="شماره موبایل" type="text" />
+            </Grid>
+            <Grid item xs={6} sm={12}>
+              <FormInputs name="password" label="رمز عبور" type="password" />
+            </Grid>
+            <Grid item xs={6} sm={12}>
+              <FormInputs
+                name="confirmPassword"
+                label="تکرار رمز عبور"
+                type="password"
+              />
+            </Grid>
+          </Grid>
+
+          <div className="flex justify-center px-3 py-8">
             <ButtonPostRegister
               label="ارسال"
               onError={handelsubmit}
               url="/users/register"
-              onSuccess={() => {
-                navigate(PATH_DASHBOARD.navigator.home);
-              }}
+              onSuccess={() => navigate(PATH_DASHBOARD.navigator.home)}
               data={() => PropData(methods.getValues(), avatarFile)}
               type="submit"
             />
           </div>
         </form>
       </FormProvider>
-      <div className="h-[300px]  ">
-        {AlertErorr && (
+
+      {AlertErorr && (
+        <div className="h-[300px]">
           <Alert variant="filled" severity="warning">
             {AlertErorr}
           </Alert>
-        )}
-      </div>
-    </>
+        </div>
+      )}
+    </Container>
   );
 }

@@ -212,7 +212,7 @@ export const ThemeLayout = ({ defaultPalette,children }: IProps) => {
                     {/* <SideBar /> */}
 
 
-                    <Container maxWidth='xs' className="pb-24 p-0 " component="main" sx={{ minHeight: "100vh", flex: 1, backgroundColor: 'white', zIndex:"0" }}>
+                    <Container maxWidth='xs' className=" pb-24 p-0 " component="main" sx={{ minHeight: "100vh", backgroundColor: 'white', zIndex:"0" }}>
                         {children}
                         {/*<BottomNavigator />*/}
                     </Container>

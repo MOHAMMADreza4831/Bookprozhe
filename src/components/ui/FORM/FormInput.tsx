@@ -7,12 +7,11 @@ type FormInputsprop = {
   type: string;
 };
 
-export default function FormInputs ({
+export default function FormInputs({
   name,
   label,
   type = "text",
 }: FormInputsprop) {
-  
   const {
     control,
     formState: { errors },
@@ -27,14 +26,14 @@ export default function FormInputs ({
           <TextField
             {...field}
             label={label}
+            className="w-full"
             InputLabelProps={{ shrink: true }}
             type={type}
             error={!!errors[name]}
-            helperText={!!errors[name]?.message }
+            helperText={errors[name]?.message?.toString() || ""}
           />
         )}
       />
     </>
   );
-} 
-
+}

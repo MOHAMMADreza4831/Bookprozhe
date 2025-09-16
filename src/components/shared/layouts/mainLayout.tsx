@@ -5,14 +5,13 @@ import { useEffect } from "react";
 const Layout = () => {
     const navigate = useNavigate();
 
-  useEffect(() => {
-    const Check = localStorage.getItem("token");
-    if (!Check) {
-      navigate("/auth/login")
-      return alert("مشکل در اتصال ب سرور ") 
-
-    }
-  }, []);
+  // useEffect(() => {
+  //   const Check = localStorage.getItem("token");
+  //   if (!Check) {
+  //     navigate("/auth/login")
+  //     return alert("مشکل در اتصال ب سرور ") 
+  //   }
+  // }, []);
   return (
     <>
       <Outlet />

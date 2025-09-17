@@ -18,6 +18,7 @@ import Buttonstatus1 from "./Buttenstatus1";
 import Buttonstatus2 from "./Buttonestatus2";
 import SaveIcon from "../buttonIcone/Saveicone";
 import Favoritesicone from "../buttonIcone/FavoriteIcone";
+import HoverRating from "./Ratingproduct";
 // import Ratingproduct from "./Ratingproduct";
 
 export default function AboutHistoricalBook() {
@@ -228,14 +229,13 @@ export default function AboutHistoricalBook() {
       </header>
       <section className="">
         <div className="">
-          
           <Box className=" felx flex-row">
-            <Box>
-              {/* <Ratingproduct book={book} /> */}
-            </Box>
-            <Box className=" flex flex-row items-center  gap-2 pr-3 ">
-              <SaveIcon book={book} />
-              <Favoritesicone book={book} />
+          <Box><HoverRating book={book} /></Box>
+            <Box className=" flex flex-row items-center justify-around   pr-3 ">
+              <div className="flex  gap-3">
+                <SaveIcon book={book} />
+                <Favoritesicone book={book} />
+              </div>
               <div
                 className="  flex gap- flex-row justify-center items-center  p-3"
                 style={{

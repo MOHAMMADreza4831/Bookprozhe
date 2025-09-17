@@ -40,6 +40,8 @@ export default function Favorites(book: Book) {
 
   if (isLoading) return <p>...loding</p>;
   if (isError) return <p>Erroe</p>;
+  
+console.log(love)
   return (
     <>
       <div
@@ -85,7 +87,7 @@ export default function Favorites(book: Book) {
                     />
                   </button>
                   <Box className="flex  items-center gap-1">
-                    <Rating rating={book.ref.rate} /> <p>{book.ref.rate}</p>
+                    <Rating rating={book.rate} />
                   </Box>
                 </div>
               </div>

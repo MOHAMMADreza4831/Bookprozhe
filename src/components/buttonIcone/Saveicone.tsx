@@ -35,9 +35,9 @@ export default function SaveIcon({ book }: Props) {
       >
         <button className="flex items-center" onClick={handleClick}>
           {exist ? (
-            <BookmarkIcon className="w-4 h-4" sx={{ color: "#1f5566" }} />
+            <BookmarkIcon className="w-4 h-4 " sx={{ color: "#1f5566" }} />
           ) : (
-            <BookmarkBorderIcon className="w-4 h-4" sx={{ color: "#1f5566" }} />
+            <BookmarkBorderIcon className="w-4 h-4 " sx={{ color: "#1f5566" }} />
           )}
         </button>
       </div>

@@ -53,3 +53,7 @@
   font-weight: 900;
   src: url('/assets/webfonts/Vazirmatn-Black.woff2') format('woff2'),
 }
+
+body{ 
+font-family: 'Vazir', sans-serif;
+}

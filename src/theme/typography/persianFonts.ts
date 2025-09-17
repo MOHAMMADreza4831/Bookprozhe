@@ -6,7 +6,7 @@ export default function persianFonts(): TypographyOptions {
     allVariants: {
       color: GRAY[900],
     },
-    fontFamily: "Dana",
+    fontFamily: "Vazir",
     regular10: {
       fontSize: "0.625rem",
       fontWeight: 400,

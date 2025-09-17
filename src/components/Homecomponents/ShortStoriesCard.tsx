@@ -84,7 +84,6 @@ function ShortStoriesCard() {
                 <Buttonicone book={book} />
                 <Box className="flex items-center gap-1">
                   <Rating rating={book.rate} />
-                  <p>{book.rate}</p>
                 </Box>
               </Box>
             </Box>

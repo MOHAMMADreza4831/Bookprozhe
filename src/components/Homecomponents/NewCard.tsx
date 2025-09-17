@@ -49,7 +49,7 @@ function NewCard() {
                 <Buttonicone book={item} />
                 <Box className="flex items-center gap-1">
                   <Rating rating={item.rate} />
-                  <p>{item.rate}</p>
+                  
                 </Box>
               </Box>
             </Box>

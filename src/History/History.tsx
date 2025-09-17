@@ -5,35 +5,40 @@ import { groupBooksByDate } from "@src/utils/groupedBooks";
 import { useQuery } from "@tanstack/react-query";
 import { Divider } from "@mui/material";
 
-import { Link,  } from "react-router-dom";
-import { Book } from "@src/components/Data/interfaceDATA";
+import { Link, useNavigate } from "react-router-dom";
 import Rating from "@src/components/buttonIcone/Rating";
+import { Book } from "@src/components/Data/interfaceDATA";
+import Back from "@src/components/ui/back/back";
+import { PATH_BOOKS } from "@src/routes/paths";
 
 export default function History() {
-  // const Navigate = useNavigate();
+  const navigate = useNavigate();
+
   const {
-    data: books,
+    data: history,
     isError,
     isLoading,
     error,
   } = useQuery<Book[]>({
-    queryKey: ["books"],
-    queryFn: () => axioshandel.get("/book-order").then((res) => res.data.data),
+    queryKey: ["histori"],
+    queryFn: () => axioshandel.get("/books").then((res) => res.data.data),
   });
 
   if (isLoading) return <p>در حال بارگذاری...</p>;
   if (isError) return <p>خطا در بارگذاری: {(error as Error).message}</p>;
-  if (!books || books.length === 0) return <p>کتابی موجود نیست</p>;
+  if (!history || history.length === 0) return <p>کتابی موجود نیست</p>;
 
-  const groupedBooks = groupBooksByDate(books);
-
+  const groupedBooks = groupBooksByDate(history);
   return (
     <>
-  
+      <Back
+        navigate={() => navigate(PATH_BOOKS.navigator.home)}
+        title="تاریخچه"
+      />
       <div className="">
         {Object.entries(groupedBooks).map(([date, books]) => (
-          <div key={date}>
-            <div className="pt-4  ">
+          <div key={date} className="">
+            <div className="bg- my-4">
               <Divider
                 textAlign="right"
                 className="pr-2"
@@ -64,16 +69,15 @@ export default function History() {
                         component="img"
                         image={book.image}
                         alt={book.title}
-                        className=" h-48  mb-14 object-top z-10  overflow-visible  "
+                        className=" h-48  mb-14 object-top z-10 "
                       />
                     </Link>
                     <div className=" bg-white  " style={{ opacity: 0.8 }}>
                       <div>{book.title}</div>
-                      <Box className=" flex justify-between  w-[180px] ">
+                      <Box className=" flex justify-between  gap-5  w-[180px] ">
                         <Buttonicone book={book} />
-                        <Box className="flex  items-center gap-1">
-                          <Rating  rating={book.rate} />
-                          <p>{book.rate}</p>{" "}
+                        <Box className="flex  items-center  ">
+                          <Rating rating={book.rate} />
                         </Box>
                       </Box>
                     </div>

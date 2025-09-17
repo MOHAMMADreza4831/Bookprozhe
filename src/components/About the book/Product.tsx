@@ -18,7 +18,7 @@ import Buttonstatus1 from "./Buttenstatus1";
 import Buttonstatus2 from "./Buttonestatus2";
 import SaveIcon from "../buttonIcone/Saveicone";
 import Favoritesicone from "../buttonIcone/FavoriteIcone";
-import Ratingproduct from "./Ratingproduct";
+// import Ratingproduct from "./Ratingproduct";
 
 export default function AboutHistoricalBook() {
   const [book, setBook] = useState<Book | null>(null);
@@ -231,7 +231,7 @@ export default function AboutHistoricalBook() {
           
           <Box className=" felx flex-row">
             <Box>
-              <Ratingproduct book={book} />
+              {/* <Ratingproduct book={book} /> */}
             </Box>
             <Box className=" flex flex-row items-center  gap-2 pr-3 ">
               <SaveIcon book={book} />

@@ -11,7 +11,7 @@ import { PATH_BOOKS } from "@src/routes/paths";
 import Rating from "../buttonIcone/Rating";
 import Buttonicone from "../buttonIcone/buttonsicone";
 
-function  RomanCard() {
+function RomanCard() {
   // const [books, setbooks] = useState<Book[]>([]);
 
   // useEffect(() => {
@@ -54,7 +54,7 @@ function  RomanCard() {
           className="flex-shrink-0  w-[200px] h-[300px] gap-11"
         >
           <Card>
-            <Link to={PATH_BOOKS.navigator.details(book.id)} >
+            <Link to={PATH_BOOKS.navigator.details(book.id)}>
               <CardMedia
                 component="img"
                 image={book.image}
@@ -62,7 +62,6 @@ function  RomanCard() {
                 className="w-full h-48 object-contain"
               />
             </Link>
-
 
             <Box className="flex flex-col">
               <Typography variant="h6" className="w-40">
@@ -72,8 +71,7 @@ function  RomanCard() {
               <Box className="flex justify-between m-2 ">
                 <Buttonicone book={book} />
                 <Box className="flex items-center gap-1">
-                  <Rating  rating={book.rate} />
-                  <p>{book.rate}</p>
+                  <Rating rating={book.rate} />
                 </Box>
               </Box>
             </Box>

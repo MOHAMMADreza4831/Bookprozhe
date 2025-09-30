@@ -30,12 +30,11 @@ api.interceptors.request.use(
   (config) => {
     // Get the access token from local storage
     const accessToken = localStorage.getItem('accessToken');
-
+    
     // If an access token exists, add it to the request headers
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
-
     return config;
   },
   (error) => {

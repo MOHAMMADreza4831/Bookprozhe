@@ -6,10 +6,10 @@ export default function Register() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className=" ">
       <Back navigate={() => navigate(-1)} title="ثبت نام " />
 
       <Formregister />
-    </>
+    </div>
   );
 }

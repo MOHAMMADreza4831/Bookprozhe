@@ -7,8 +7,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
 import { PATH_DASHBOARD } from "@src/routes/paths";
 import FormInputs from "../ui/FORM/FormInput";
-import ButtonPostRegister from "../ui/buttons/ButtonePostRegister";
 import axioshandel from "./header";
+import LoadingPage from "../ui/modal/Loading";
+import SuccessModal from "../ui/modal/SuccessModal";
+import FalseModal from "../ui/modal/false";
+import { Api } from "@mui/icons-material";
 
 type LoginFormInputs = {
   email: string;
@@ -21,7 +24,9 @@ const emailSchema = z.object({
 });
 
 export default function Login1() {
-  const [AlertErorr, setAlertErorr] = useState<string | null>(null);
+  const [loading, setloading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [failure, setFailure] = useState(false);
   const [alert, setAlert] = useState<{
     type: "success" | "error" | "";
     message: string;
@@ -39,18 +44,33 @@ export default function Login1() {
         login: data.email,
         password: data.Password,
       });
+
       const Token = res.data.data.token;
       localStorage.setItem("token", Token);
+      setloading(false);
+      setSuccess(true);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       navigate(PATH_DASHBOARD.navigator.home);
     } catch (err) {
       console.log(err);
-      setAlert({ type: "error", message: "ورود ناموفق بود" });
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setloading(false);
+      setFailure(true);
+      await new Promise((resolve) => setTimeout(resolve, 900));
+      setFailure(false);
     }
   };
 
+  const handleClick = async () => {
+    setloading(true);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    setloading(false);
+  };
   return (
     <>
-      <Container maxWidth="xs">
+      <SuccessModal Open={success} setopen={setSuccess} />
+      <FalseModal  Open={failure} setopen={setFailure} />
+      <Container maxWidth="sm">
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onsubmit)}>
             <div className=" h-[100vh] flex flex-col  justify-evenly items-center ">
@@ -86,20 +106,22 @@ export default function Login1() {
                   </Grid>
                 </Grid>
               </div>
-
-              <Button
-                className="rounded-[20px] bg-[#95bccc] w-full "
-                type="submit"
-                sx={{ color: "white" }}
-              >
-                ارسال
-              </Button>
+              <div className="w-full">
+                <Button
+                  className="rounded-[20px] bg-[#95bccc] w-full "
+                  type="submit"
+                  onClick={handleClick}
+                  sx={{ color: "white" }}
+                >
+                  ارسال
+                </Button>
+                <LoadingPage Open={loading} setopen={setloading} />
+              </div>
 
               <div className="">
                 <p>
                   ایا حساب کاربری ندارید؟{" "}
                   <a href="register" style={{ color: "#b7d9e5" }}>
-                    {" "}
                     اینجا کلید کنید{" "}
                   </a>
                 </p>

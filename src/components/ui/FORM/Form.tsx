@@ -73,19 +73,19 @@ export default function Formregister() {
             <AvatarUpload value={avatarFile} onChange={setAvatarFile} />
           </div>
           <Grid container spacing={3} className="pt-8 flex justify-center  ">
-            <Grid item xs={6} sm={12}>
+            <Grid item xs={12} >
               <FormInputs name="firstname" label="نام" type="text" />
             </Grid>
-            <Grid item xs={6} sm={12}>
+            <Grid item xs={12} >
               <FormInputs name="lastname" label="نام خانوادگی" type="text" />
             </Grid>
-            <Grid item xs={6} sm={12}>
+            <Grid item xs={12} >
               <FormInputs name="login" label="شماره موبایل" type="text" />
             </Grid>
-            <Grid item xs={6} sm={12}>
+            <Grid item xs={12} >
               <FormInputs name="password" label="رمز عبور" type="password" />
             </Grid>
-            <Grid item xs={6} sm={12}>
+            <Grid item xs={12} >
               <FormInputs
                 name="confirmPassword"
                 label="تکرار رمز عبور"

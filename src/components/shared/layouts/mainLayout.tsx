@@ -10,7 +10,7 @@ const Layout = () => {
     if (!Check) {
       navigate("/auth/login")
       return alert("مشکل در اتصال ب سرور ") 
-    }
+}
   }, []);
   return (
     <>

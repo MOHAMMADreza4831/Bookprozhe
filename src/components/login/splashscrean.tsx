@@ -1,12 +1,12 @@
 import Righte from "../login/image/Vectorright.png";
 import left from "../login/image/Vector.png";
 import left2 from "../login/image/Ellipse 1.png";
-// import { SlArrowRight } from "react-icons/sl";
 import logo from "../login/image/Group 160.svg";
 import send from "../login/image/.svg";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
-import gif from "../login/image/BOOK WALKING.gif";
+import gif from "../login/image/Astronaut & Book 2.0 (Reloaded) - Copy.gif";
+
 export default function Splashscrean() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -20,72 +20,58 @@ export default function Splashscrean() {
 
   if (loading)
     return (
-      <div className="flex items-center justify-center h-screen ">
-        <img src={gif} alt="" className="w-[100px] h-[100px]" />
+      <div className=" flex items-center justify-center h-screen ">
+        <img src={gif} alt="" className="w-52 h-5w-52  " />
       </div>
     );
 
   return (
-    <>
-      <div className="relative">
+    <div className="grid  relative    ">
+      <img
+        src={Righte}
+        className="absolute top-0 right-0 w-28 sm:w-32 md:w-36 "
+      />
+      <img src={left} className="absolute top-0 left-0 w-32 sm:w-40 md:w-44 " />
+      <img
+        src={left2}
+        className="absolute top-[35vh] left-0 w-14 sm:w-16 md:w-20"
+      />
 
-        <div>
-          <img
-            src={Righte}
-            alt=""
-            className="absolute top-0 right-0 w-[120px]"
-          />
-          <img src={left} alt="" className="absolute top-0 left-0 w-[150px]" />
-          <img
-            src={left2}
-            alt=""
-            className="absolute top-[300px] left-0  w-[50px]"
-          />
-          <img
-            src={logo}
-            alt=""
-            className="absolute top-[150px] right-2 w-[350px] "
-          />
+      <header className="  flex flex-row-reverse  items-center  mx-8  mt-[18vh]  md:">
+        <div className="flex flex-col items-center  ">
+          <h1 className=" sm:text-2xl md:text-3xl md:w-36    font-semibold text-[#95BCCC] ">
+            دانلود کتاب
+          </h1>
+          <h2 className="text-xl sm:text-1xl pb-16 sm:pb-14 font-semibold text-[#F0A9AA] text-left">
+            خارجــــــــــی
+          </h2>
         </div>
-        <div
-          style={{ color: "#95BCCC" }}
-          className=" absolute left-8 top-[190px] text-3xl font-semibold"
-        >
-          دانلود کتاب
-        </div>
-        <div
-          style={{ color: "#F0A9AA" }}
-          className=" absolute left-9 top-[230px] text-2xl font-semibold "
-        >
-          خارجـــــــــــی
-        </div>
-        <div className="absolute top-[540px] w-full flex flex-col items-center text-center px-4">
-          <div
-            className="text-[35px] font-semibold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#39778D] via[#CE7C99]  to-[#f0a9aaa1]"
-            //   style={{
-            //     backgroundImage:
-            //       "linear-gradient(to right, #39778D , #F0A9AA )",
-            //   }}
-          >
-            آبان بووک
+        <img src={logo} alt="" className=" w-56  sm:w-64 md:w-[50vh]  mb-4" />
+      </header>
+      <div className="">
+        <main className="flex flex-col  items-center mt-[17vh]    sm:mt-28  ">
+          <div className="flex justify-center">
+            <h3 className="text-3xl sm:text-4xl  font-bold  bg-gradient-to-r from-[#39778D] to-[#F0A9AA] bg-clip-text text-transparent self-start ">
+              آبان بووک
+            </h3>
           </div>
-          <p className="max-w-[600px]   font-medium leading-relaxed text-justify text-[18px]">
+          <p className=" text-[20px] md:text-[20px] py-2 px-4  leading-normal  whitespace-normal text-justify  ">
             یک وب اپلیکیشن ایرانی دانلود کتاب خارجی است که بیش از 5 میلیون کتاب
-            شامل خرید کتاب های آمازون و گوگل پلی را با قیمت پایینتر از این
-            فروشگاه های کتاب به فروش می‌رساند.
+            شامل خرید کتاب‌های آمازون و گوگل پلی را با قیمت پایین‌تر از این
+            فروشگاه‌ها به فروش می‌رساند.
           </p>
-        </div>
+        </main>
         <button
           onClick={handelonclick}
           style={{
             backgroundImage:
               "linear-gradient(to bottom, #BC7A7F, #9F7F89 ,#39778D)",
           }}
-          className="absolute top-[780px]  text-white px-[20px] py-[20px] rounded-[100%] right-3"
+          className="flex   sm:mt-16 w-[55px] h-[55px] justify-center  text-white px-[20px] py-[20px] rounded-[100%] mr-3 "
         >
-          <img src={send} alt="" />
+          <img className="" src={send} alt="" />
         </button>
       </div>
-    </>
+    </div>
   );
 }

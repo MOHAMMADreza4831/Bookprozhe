@@ -59,7 +59,7 @@ export default function ButtonPostRegister({
       type={type}
       onClick={handelsubmit}
       disabled={loading}
-    >
+      >
       {loading ? "درحال ارسال..." : label}
     </Button>
   );

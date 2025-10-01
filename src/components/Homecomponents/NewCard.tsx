@@ -9,7 +9,6 @@ import Rating from "../buttonIcone/Rating";
 import Buttonicone from "../buttonIcone/buttonsicone";
 
 function NewCard() {
-
   const {
     data: books,
     isLoading,
@@ -28,7 +27,7 @@ function NewCard() {
       {Firstpagecart?.map((item) => (
         <SwiperSlide
           key={item.id}
-          className="flex-shrink-0  w-[200px] h-[300px] gap-11"
+          className="flex-shrink-0  h-[350px] w-[200px]  gap-11"
         >
           <Card>
             <Link to={PATH_BOOKS.navigator.details(item.id)}>
@@ -49,7 +48,6 @@ function NewCard() {
                 <Buttonicone book={item} />
                 <Box className="flex items-center gap-1">
                   <Rating rating={item.rate} />
-                  
                 </Box>
               </Box>
             </Box>

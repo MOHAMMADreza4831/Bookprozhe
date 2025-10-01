@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DateObject from "react-date-object";
 import Back from "@src/components/ui/back/back";
+import EditeProfileModal from "@src/components/ui/modal/EditeProfileModal";
+import { Book } from "@src/components/Data/interfaceDATA";
 type datatype = {
   id: number;
   first_name: string;
@@ -26,9 +28,12 @@ export default function Detailprofile() {
     });
   }, []);
 
+
+
   return (
     <>
-    <Back navigate={()=> navigate(-1)} title="پروفایل"/>
+
+      <Back navigate={() => navigate(-1)} title="پروفایل" />
       <div>
         {Data.map((item) => {
           return (
@@ -37,7 +42,7 @@ export default function Detailprofile() {
                 <Avatar
                   className="flex mx-[25%] mb-10  items-center"
                   sx={{ width: 200, height: 200 }}
-                    src={item.image ? item.image : "/default-avatar.png"}
+                  src={item.image ? item.image : "/default-avatar.png"}
                 />
                 <Box className="flex  justify-between mx-5 p-4   rounded-[10px] border border-[#95BCCC]  bg-slate-100 ">
                   <div>نام:</div>
@@ -71,7 +76,7 @@ export default function Detailprofile() {
                 <Button
                   variant="contained"
                   className=" bg-[#95BCCC]"
-                  onClick={() => navigate(`/editProfile/${item.id}`)}
+                  onClick={()=>navigate(`/editProfile/${item.id}`)}
                 >
                   ویرایش
                 </Button>

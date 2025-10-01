@@ -1,4 +1,4 @@
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -27,7 +27,7 @@ export default function Profilemain() {
       setData([res.data.data]);
     });
   }, []);
-  const dataimage = Data.map((item)=>item.image)
+  const dataimage = Data.map((item) => item.image);
   return (
     <>
       <div
@@ -36,7 +36,7 @@ export default function Profilemain() {
       >
         <div className="flex      py-4 ">
           <button
-            onClick={() => navigate( PATH_DASHBOARD.navigator.home)}
+            onClick={() => navigate(PATH_DASHBOARD.navigator.home)}
             style={{ color: "white" }}
             className="font-bold flex "
           >
@@ -49,33 +49,37 @@ export default function Profilemain() {
         </div>
       </div>
       <div className="flex flex-col justify-center gap10 ">
-        <div className="flex flex-col w-full  items-center mt-36">
-          <Avatar alt="Remy Sharp" src={dataimage} sx={{ width: 200, height: 200 }} />
+        <div className="flex flex-col w-full  items-center mt-5 md:mt-10">
+          <Avatar
+            alt="Remy Sharp"
+            src={dataimage}
+            sx={{ width: 200, height: 200 }}
+          />
         </div>
         <div className="flex mx-7 gap-10  flex-col mt-10 ">
-          <Button
-            onClick={() => navigate("/detailprofile")}
-            className="p-4 flex bg-gray-200 justify-start"
-            variant="outlined"
-          >
-            حساب کاربری
-          </Button>
-          <Button
-            onClick={() => navigate("/savecard")}
-            className="p-4 flex bg-gray-200 justify-start items-center gap-1"
-            variant="outlined"
-          >
-            <BookmarkBorderOutlinedIcon />
-            نشان شده ها
-          </Button>
-          <Button
-            onClick={() => navigate("/favorites")}
-            className="p-4 flex bg-gray-200 justify-start items-center gap-1"
-            variant="outlined"
-          >
-            <FavoriteBorderIcon />
-            علاقه مندی{" "}
-          </Button>
+              <Button
+                onClick={() => navigate("/detailprofile")}
+                className="p-4 flex bg-gray-200 justify-start"
+                variant="outlined"
+              >
+                حساب کاربری
+              </Button>
+              <Button
+                onClick={() => navigate("/savecard")}
+                className="p-4 flex bg-gray-200 justify-start items-center gap-1"
+                variant="outlined"
+              >
+                <BookmarkBorderOutlinedIcon />
+                نشان شده ها
+              </Button>
+              <Button
+                onClick={() => navigate("/favorites")}
+                className="p-4 flex bg-gray-200 justify-start items-center gap-1"
+                variant="outlined"
+              >
+                <FavoriteBorderIcon />
+                علاقه مندی{" "}
+              </Button>
         </div>
       </div>
     </>

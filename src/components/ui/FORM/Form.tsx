@@ -5,9 +5,11 @@ import z from "zod";
 import ButtonPostRegister from "../buttons/ButtonePostRegister";
 import AvatarUpload from "./Avatar";
 import { useState } from "react";
-import { Alert, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PATH_DASHBOARD } from "@src/routes/paths";
+import SuccessModal from "../modal/SuccessModal";
+import FalseModal from "../modal/false";
 
 type Formregisterdata = {
   firstname: string;
@@ -33,7 +35,9 @@ const emailSchema = z
 
 export default function Formregister() {
   const navigate = useNavigate();
-  const [AlertErorr, setAlertErorr] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const [failure, setFailure] = useState(false);
+  // const [AlertErorr, setAlertErorr] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
   const methods = useForm<Formregisterdata>({
@@ -58,62 +62,75 @@ export default function Formregister() {
     console.log("اطلاعات فرم:", data);
   };
 
-  const handelsubmit = (msg: string) => {
-    setAlertErorr(msg);
+  const handelsubmit = () => {
+    setFailure(true);
     setTimeout(() => {
-      setAlertErorr(null);
-    }, 3000);
+      setFailure(false);
+    }, 900);
+  };
+
+  const handelSuccess = () => {
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+      navigate(PATH_DASHBOARD.navigator.home);
+    }, 1500);
   };
 
   return (
-    <Container maxWidth="sm">
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="flex justify-center pt-5">
-            <AvatarUpload value={avatarFile} onChange={setAvatarFile} />
-          </div>
-          <Grid container spacing={3} className="pt-8 flex justify-center  ">
-            <Grid item xs={12} >
-              <FormInputs name="firstname" label="نام" type="text" />
+    <>
+      <SuccessModal Open={success} setopen={setSuccess} />
+      <FalseModal Open={failure} setopen={setFailure} />
+
+      <Container maxWidth="sm">
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <div className="flex justify-center pt-5">
+              <AvatarUpload value={avatarFile} onChange={setAvatarFile} />
+            </div>
+            <Grid container spacing={3} className="pt-8 flex justify-center  ">
+              <Grid item xs={12}>
+                <FormInputs name="firstname" label="نام" type="text" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormInputs name="lastname" label="نام خانوادگی" type="text" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormInputs name="login" label="شماره موبایل" type="text" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormInputs name="password" label="رمز عبور" type="password" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormInputs
+                  name="confirmPassword"
+                  label="تکرار رمز عبور"
+                  type="password"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} >
-              <FormInputs name="lastname" label="نام خانوادگی" type="text" />
-            </Grid>
-            <Grid item xs={12} >
-              <FormInputs name="login" label="شماره موبایل" type="text" />
-            </Grid>
-            <Grid item xs={12} >
-              <FormInputs name="password" label="رمز عبور" type="password" />
-            </Grid>
-            <Grid item xs={12} >
-              <FormInputs
-                name="confirmPassword"
-                label="تکرار رمز عبور"
-                type="password"
+
+            <div className="flex justify-center px-3 py-8">
+              <ButtonPostRegister
+                label="ارسال"
+                onError={handelsubmit}
+                url="/users/register"
+                onSuccess={handelSuccess}
+                data={() => PropData(methods.getValues(), avatarFile)}
+                type="submit"
               />
-            </Grid>
-          </Grid>
+            </div>
+          </form>
+        </FormProvider>
 
-          <div className="flex justify-center px-3 py-8">
-            <ButtonPostRegister
-              label="ارسال"
-              onError={handelsubmit}
-              url="/users/register"
-              onSuccess={() => navigate(PATH_DASHBOARD.navigator.home)}
-              data={() => PropData(methods.getValues(), avatarFile)}
-              type="submit"
-            />
+        {/* {AlertErorr && (
+          <div className="h-[300px]">
+            <Alert variant="filled" severity="warning">
+              {AlertErorr}
+            </Alert>
           </div>
-        </form>
-      </FormProvider>
-
-      {AlertErorr && (
-        <div className="h-[300px]">
-          <Alert variant="filled" severity="warning">
-            {AlertErorr}
-          </Alert>
-        </div>
-      )}
-    </Container>
+        )} */}
+      </Container>
+    </>
   );
 }

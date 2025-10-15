@@ -28,7 +28,7 @@ export default function Splashscrean() {
   return (
     <div className="grid  relative    ">
       <img
-        src={Righte}
+      src={Righte}
         className="absolute top-0 right-0 w-28 sm:w-32 md:w-36 "
       />
       <img src={left} className="absolute top-0 left-0 w-32 sm:w-40 md:w-44 " />

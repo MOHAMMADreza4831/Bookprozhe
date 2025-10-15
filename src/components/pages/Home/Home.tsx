@@ -6,6 +6,9 @@ import HistoricalCard from "@src/components/Homecomponents/HistoricalCard";
 import NavbarHome from "@src/components/Homecomponents/navbarhome";
 import { useEffect } from "react";
 import queryClient from "@src/utils/queryClient";
+import SearchBook from "@src/components/ui/buttons/SearchBook";
+import { AnimatePresence, motion } from "framer-motion";
+import SwiperHome from "@src/components/ui/swiper/Swiper ";
 
 const Home = () => {
   useEffect(() => {
@@ -39,64 +42,19 @@ const Home = () => {
 
   return (
     <>
-      <div className="px-3">
+      <div className="px-2">
         <NavbarHome />
         <div>
+          {/* <SearchBook /> */}
           <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                paddingTop: "2px",
-                paddingBottom: "10px",
-              }}
-            >
-              <h1 className="font-bold">جدید ترین ها </h1>
-              <Link to={`/products/newbook/1`}>موارد بیشتر</Link>
+            <div className="flex  flex-col pt-10">
+              {/* <p className="font-bold">جدید ترین ها </p> */}
+              <SwiperHome />
             </div>
-
-            <NewCard />
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              paddingTop: "2px",
-              paddingBottom: "10px",
-            }}
-          >
-            <h1 className="font-bold">کتاب های تاریخی</h1>
-            <Link to={`/products/historicalbook/1`}>موارد بیشتر</Link>
-          </div>
-
-          <HistoricalCard />
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              paddingTop: "2px",
-              paddingBottom: "10px",
-            }}
-          >
-            <h1 className="font-bold">کتاب های رمان</h1>
-            <Link to={`/products/roman/1`}>موارد بیشتر</Link>{" "}
-          </div>
-
-          <RomanCard />
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              paddingTop: "2px",
-              paddingBottom: "10px",
-            }}
-          >
-            <h1 className="font-bold">داستان های کوتاه</h1>
-            <Link to={`/products/shortstory/1`}>موارد بیشتر</Link>
-          </div>
-          <ShortStoriesCard />
+        <div>
+          
+        </div>
         </div>
       </div>
     </>

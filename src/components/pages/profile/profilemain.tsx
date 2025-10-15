@@ -57,29 +57,29 @@ export default function Profilemain() {
           />
         </div>
         <div className="flex mx-7 gap-10  flex-col mt-10 ">
-              <Button
-                onClick={() => navigate("/detailprofile")}
-                className="p-4 flex bg-gray-200 justify-start"
-                variant="outlined"
-              >
-                حساب کاربری
-              </Button>
-              <Button
-                onClick={() => navigate("/savecard")}
-                className="p-4 flex bg-gray-200 justify-start items-center gap-1"
-                variant="outlined"
-              >
-                <BookmarkBorderOutlinedIcon />
-                نشان شده ها
-              </Button>
-              <Button
-                onClick={() => navigate("/favorites")}
-                className="p-4 flex bg-gray-200 justify-start items-center gap-1"
-                variant="outlined"
-              >
-                <FavoriteBorderIcon />
-                علاقه مندی{" "}
-              </Button>
+          <Button
+            onClick={() => navigate("/detailprofile")}
+            className="p-4 flex bg-gray-200 justify-start"
+            variant="outlined"
+          >
+            حساب کاربری
+          </Button>
+          <Button
+            onClick={() => navigate("/savecard")}
+            className="p-4 flex bg-gray-200 justify-start items-center gap-1"
+            variant="outlined"
+          >
+            <BookmarkBorderOutlinedIcon />
+            نشان شده ها
+          </Button>
+          <Button
+            onClick={() => navigate("/favorites")}
+            className="p-4 flex bg-gray-200 justify-start items-center gap-1"
+            variant="outlined"
+          >
+            <FavoriteBorderIcon />
+            علاقه مندی{" "}
+          </Button>
         </div>
       </div>
     </>

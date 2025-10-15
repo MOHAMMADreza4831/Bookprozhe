@@ -31,6 +31,7 @@ import Splashscrean from "@src/components/login/splashscrean";
 import Login1 from "@src/components/login/login1";
 import ProductList from "@src/hooks/ProductList";
 import Register from "@src/components/login/register";
+import SearchBook from "@src/components/ui/buttons/SearchBook";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -144,7 +145,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: PATH_DASHBOARD.navigator.search,
-            element: <Search />,
+            element: <SearchBook  />,
           },
           {
             path: PATH_DASHBOARD.navigator.profile,

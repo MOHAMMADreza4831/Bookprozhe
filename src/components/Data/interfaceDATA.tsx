@@ -78,14 +78,14 @@ export interface Book {
   basket: string;
   ref_id: number;
   description: string;
-picture:string
+  picture: string;
   collection: number;
   total: number;
   order_id: number;
   status: number;
   book_id: number;
   type: string[];
-  ref:collection_ref
+  ref: collection_ref;
   image: string;
   author: string;
   Genre: string;

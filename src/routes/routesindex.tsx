@@ -32,6 +32,7 @@ import Login1 from "@src/components/login/login1";
 import ProductList from "@src/hooks/ProductList";
 import Register from "@src/components/login/register";
 import SearchBook from "@src/components/ui/buttons/SearchBook";
+import Basecard from "@src/components/About the book/basecard";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -90,7 +91,7 @@ export const routes: RouteObject[] = [
 
       {
         path: PATH_BOOKS.navigator.details(),
-        element: <AboutHistoricalBook />,
+        element: <Basecard />,
       },
 
       {
@@ -136,7 +137,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             path: "book/:id",
-            element: <AboutHistoricalBook />,
+            element: <Basecard />,
           },
 
           {

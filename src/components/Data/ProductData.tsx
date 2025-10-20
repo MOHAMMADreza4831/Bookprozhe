@@ -1,6 +1,6 @@
-import image1 from "@src/assets/image/front-view-young-beautiful-lady-white-t-shirt-black-jeans-coat-holding-green-book-smiling-white_140725-18664.jpg";
 import image2 from "@src/assets/image/handsome-man-with-blue-glasses-reading-book_1368-5250.jpg";
 import image3 from "@src/assets/image/man-handing-black-book_1187-2030.jpg";
+import image4 from "@src/assets/image/image.png";
 
 export const products = [
   {
@@ -21,4 +21,20 @@ export const products = [
     price: "180000",
     image: image3,
   },
+  {
+    id: "3",
+    paragraf: "بهترین موقعیت برای خرید کتاب ",
+    text: "با تخفبف ویژه",
+    discount: "90",
+    title: "React Book",
+    price: "180000",
+    image: image4,
+  },
+];
+
+export const genertitle = [
+  { title: "همه", id: 0 },
+  { title: "جنایی", id: 1 },
+  { title: "تاریخی", id: 3 },
+  { title: "معمایی", id: 2 },
 ];

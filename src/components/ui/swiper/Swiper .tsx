@@ -1,50 +1,64 @@
-import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import { PATH_BOOKS } from "@src/routes/paths";
+import { useRef } from "react";
 import { products } from "@src/components/Data/ProductData";
+import "@src/styles/index.css";
+import "swiper/css";
+import "swiper/css/pagination";
 export default function SwiperHome() {
-  console.log(products);
-  const Todaysdate = new Date();
-  const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(Todaysdate.getDate() - 30);
+  const progressCircle = useRef<HTMLDivElement>(null);
+  const progressContent = useRef<HTMLSpanElement>(null);
+
+  const onAutoplayTimeLeft = (_s: any, time: number, progress: number) => {
+    if (progressCircle.current) {
+      progressCircle.current.style.setProperty("--progress", `${1 - progress}`);
+    }
+    if (progressContent.current) {
+      progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+    }
+  };
 
   return (
-    <div className="flex flex-row justify-center items-center px-4 bg-">
+    <div className="  ">
       <Swiper
-        spaceBetween={0}
-        pagination={true}
-        modules={[Pagination]}
-        className=""
+        spaceBetween={10}
+        centeredSlides={true}
+        autoplay={{
+          delay: 5500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination, Navigation]}
+        onAutoplayTimeLeft={onAutoplayTimeLeft}
+        className="flex items-start justify-start h-[380px] "
+        slidesPerView={1}
       >
         {products?.map((item) => (
-          <SwiperSlide key={item.id} className="px-3  ">
-            <Card className=" flex  overflow-hidden rounded-xl">
-              <div className="flex flex-col justify-center items">
-                <Typography className="break-words  text-sm">
+          <SwiperSlide key={item.id} className="   h-full">
+            <Card className="flex items-center  justify-between overflow-auto rounded-xl ">
+              <div className="flex flex-col justify-center items-start gap-2">
+                <Typography className="break-words text-sm text-gray-600">
                   {item.paragraf}
                 </Typography>
-                <Typography className=" w-[140px] overflow-hidden text-2xl  font-bold">
+                <Typography className="w-[140px]  overflow-hidden text-2xl font-bold">
                   {item.text}
                 </Typography>
                 <p className="font-medium text-3xl text-[#ea4c13]">
                   {item.discount}%
                 </p>
-                <Button className="bg-[#ea4c13] text-white  w-2 h-5 rounded-f ">
-                  clime
+                <Button className="bg-[#ea4c13] text-white px-4 py-2 rounded-full hover:bg-[#c5360f] transition">
+                  claim
                 </Button>
               </div>
-              <div className="w-[300px] h-[300px] ">
+              <div className="w-full    flex justify-center    ">
                 <CardMedia
                   component="img"
                   image={item.image}
                   alt={item.title}
-                  className="  object-contain   w "
+                  className="object-contain w-full h-[350px]"
                 />
               </div>
             </Card>

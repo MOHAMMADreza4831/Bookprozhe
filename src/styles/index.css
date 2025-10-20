@@ -64,3 +64,29 @@ html {
     max-width: 1536px;
   }
 }
+
+.mySwiper {
+  .swiper-pagination {
+    display: flex;
+    justify-content: center;
+  
+    gap: 5px;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: #b0b0b0;
+    opacity: 0.6;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #ea4c13;
+
+    width: 14px;
+    height: 14px;
+    opacity: 1;
+  }
+}

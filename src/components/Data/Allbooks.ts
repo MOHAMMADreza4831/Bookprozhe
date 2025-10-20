@@ -8,6 +8,29 @@ import image7 from "@src/components/assets/image/Rectangle 43.svg";
 import image8 from "@src/components/assets/image/Rectangle 45.svg";
 import { Book } from "../Data/interfaceDATA";
 
+export interface book {
+  id: string; // شناسه عددی کتاب
+  title: string; // عنوان کتاب
+  author: string; // نویسنده
+  language: string; // زبان کتاب
+  age: number; // گروه سنی یا سن
+  description: string; // توضیحات کتاب
+  summary: string; // خلاصه کتاب
+  is_translated: number; // آیا ترجمه شده (۰ یا ۱) → بهتره boolean بشه
+  shabak: string; // شماره شابک (ISBN)
+  pages: string; // تعداد صفحات (بهتره number باشه ولی از API رشته میاد)
+  rate: number; // امتیاز میانگین
+  rate_count: number; // تعداد رأی‌ها
+  image: string; // شناسه یا نام عکس
+  created_at: string; // زمان ساخت (ISO Date string)
+  updated_at: string; // زمان آپدیت (ISO Date string)
+  picture: string;
+}
+
+export interface GenreBook {
+  book: [];
+}
+
 export const Allbooks: Book[] = [
   {
     id: "1",

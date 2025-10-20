@@ -58,7 +58,7 @@ function ShortStoriesCard() {
 
       modules={[FreeMode, Pagination]}
       className="mySwiper"
-    >
+    >x
       {FirstPageCart?.map((book) => (
         <SwiperSlide
           key={book.id}

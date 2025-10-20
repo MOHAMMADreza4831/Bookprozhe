@@ -9,6 +9,7 @@ import queryClient from "@src/utils/queryClient";
 import SearchBook from "@src/components/ui/buttons/SearchBook";
 import { AnimatePresence, motion } from "framer-motion";
 import SwiperHome from "@src/components/ui/swiper/Swiper ";
+import Home_Header from "./Home_Header";
 
 const Home = () => {
   useEffect(() => {
@@ -45,16 +46,14 @@ const Home = () => {
       <div className="px-2">
         <NavbarHome />
         <div>
-          {/* <SearchBook /> */}
           <div>
-            <div className="flex  flex-col pt-10">
-              {/* <p className="font-bold">جدید ترین ها </p> */}
+            <div className="flex flex-col ">
               <SwiperHome />
             </div>
           </div>
-        <div>
-          
-        </div>
+          <div>
+            <Home_Header />
+          </div>
         </div>
       </div>
     </>

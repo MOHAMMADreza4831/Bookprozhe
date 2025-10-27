@@ -5,34 +5,34 @@ import {
   useRouteError,
 } from "react-router-dom";
 import { lazy } from "react";
-import Layout from "@src/components/shared/layouts/mainLayout.tsx";
+import Layout from "../components/shared/layouts/mainLayout.tsx";
 import { PATH_AUTH, PATH_BOOKS, PATH_DASHBOARD } from "./paths";
-import AuthLayout from "@src/components/shared/layouts/authLayout.tsx";
+import AuthLayout from "../components/shared/layouts/authLayout.tsx";
 import AboutHistoricalBook from "@src/components/About the book/Product";
 // import BooksCategoryDashboardPage from "@src/components/About the book/BooksCategoryDashboardPage";
 import ProductsPage from "@src/components/About the book/ProductsPage";
-import Home from "@src/components/pages/Home/Home";
+import Home from "../components/pages/Home/Home";
 
-import Shop from "@src/components/shop/ShopList";
+import Shop from "../components/shop/ShopList";
 // import Splashscrean from "@src/components/login/splashscrean";
 // import Login1 from "@src/components/login/login1";
 // import Login2 from "@src/components/login/login2";\
-import History from "@src/History/History";
+import History from "../History/History";
 import Search from "@src/components/pages/search/Search";
 // import Login1 from "@src/components/login/login1";
 // import Login2 from "@src/components/login/login2";
 // import Profile from "@src/components/pages/profile";
-import EditProfile from "@src/components/pages/profile";
-import Profilemain from "@src/components/pages/profile/profilemain";
-import Detailprofile from "@src/components/pages/profile/detailprofile";
-import Favorites from "@src/components/pages/Collection/Favorites";
-import SaveCart from "@src/components/pages/Collection/SaveCart";
-import Splashscrean from "@src/components/login/splashscrean";
-import Login1 from "@src/components/login/login1";
-import ProductList from "@src/hooks/ProductList";
-import Register from "@src/components/login/register";
-import SearchBook from "@src/components/ui/buttons/SearchBook";
-import Basecard from "@src/components/About the book/basecard";
+import EditProfile from "../components/pages/profile";
+import Profilemain from "../components/pages/profile/profilemain";
+import Detailprofile from "../components/pages/profile/detailprofile";
+import Favorites from "../components/pages/Collection/Favorites";
+import SaveCart from "../components/pages/Collection/SaveCart";
+import Splashscrean from "../components/login/splashscrean";
+import Login1 from "../components/login/login1";
+import ProductList from "../hooks/ProductList";
+import Register from "../components/login/register";
+import SearchBook from "../components/ui/buttons/SearchBook";
+import Basecard from "../components/About the book/basecard";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));

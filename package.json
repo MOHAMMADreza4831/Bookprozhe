@@ -28,6 +28,7 @@
     "date-fns": "^4.1.0",
     "date-fns-jalali": "^3.2.0-0",
     "dayjs": "^1.11.13",
+    "flowbite-react": "^0.12.9",
     "framer-motion": "^12.23.24",
     "jalaali-react-date-picker": "^1.0.19",
     "jalali-dayjs": "^0.0.1",

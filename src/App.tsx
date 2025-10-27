@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routesindex";
-import ThemeLayout from "@src/providers/themeProvider.tsx";
+import ThemeLayout from "./providers/themeProvider.tsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

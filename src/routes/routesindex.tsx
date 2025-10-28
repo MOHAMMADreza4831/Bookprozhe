@@ -18,7 +18,6 @@ import Shop from "../components/shop/ShopList";
 // import Login1 from "@src/components/login/login1";
 // import Login2 from "@src/components/login/login2";\
 import History from "../History/History";
-import Search from "@src/components/pages/search/Search";
 // import Login1 from "@src/components/login/login1";
 // import Login2 from "@src/components/login/login2";
 // import Profile from "@src/components/pages/profile";
@@ -33,6 +32,8 @@ import ProductList from "../hooks/ProductList";
 import Register from "../components/login/register";
 import SearchBook from "../components/ui/buttons/SearchBook";
 import Basecard from "../components/About the book/basecard";
+import Login2 from "@src/components/login/login2.tsx";
+import Forgotpassword from "@src/components/login/Forgot password.tsx";
 
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
@@ -71,6 +72,14 @@ export const routes: RouteObject[] = [
       {
         path: "login",
         element: <Login1 />,
+      },
+      {
+        path: "forgotpassword",
+        element: <Forgotpassword />,
+      },
+      {
+        path: "loginagain",
+        element: <Login2/>,
       },
       // {
       //   path: "dashboard/category/:type",

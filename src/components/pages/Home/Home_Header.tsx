@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
 import { Book } from "@src/components/Data/interfaceDATA";
-import { genertitle } from "@src/components/Data/ProductData";
+// import { genertitle } from "@src/components/Data/ProductData";
 import axioshandel from "@src/components/login/header";
 import { PATH_BOOKS } from "@src/routes/paths";
 import { useEffect, useState } from "react";

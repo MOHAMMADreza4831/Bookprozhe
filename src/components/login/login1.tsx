@@ -53,38 +53,24 @@ export default function Login1() {
   //   }
   // };
 
-  const handleClick = async () => {
-    setloading(true);
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    setloading(false);
+  const handelclick = () => {
+    navigate("/auth/loginagain");
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("✅ کاربر وارد شد:", user);
-
-      localStorage.setItem("user", JSON.stringify(user));
-
-      navigate("/login/user");
-    } catch (error) {
-      console.error("❌ خطا در ورود:", error);
-    }
-  };
   return (
-    <div className="bg-image  ">
-      ÷
+    <div className="bg-image h-[100vh] overflow-hidden">
       <div className=" flex flex-col  ">
         <div className="mt-[60vh] flex flex-col  justify-center items-center ">
-          <Button
-            onClick={handleGoogleLogin}
-            className="  border border-white/30   h-14 rounded-[50px] w-[42vh] my-2 bg-black text-white "
-          >
+          <Button className="  border border-white/30   h-14 rounded-[50px] w-[42vh] my-2 bg-black text-white ">
             <p className=" ml-5 font-bold text-[19px]">ورود از طریق گوگل</p>
             <img src={iconeGoogle} />
           </Button>
-          <Button className="flex h-14 rounded-[50px] w-[42vh] my-2 bg-[#2DAA9E] text-white ">
+          <Button
+            onClick={() => {
+              handelclick();
+            }}
+            className="flex h-14 rounded-[50px] w-[42vh] my-2 bg-[#2DAA9E] text-white "
+          >
             <p className="font-bold text-[20px] ">ورود</p>
           </Button>
           <Button className=" border border-white/30 flex h-14 rounded-[50px] w-[42vh] my-2 bg-black text-white ">

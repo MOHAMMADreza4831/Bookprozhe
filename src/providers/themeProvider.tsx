@@ -9,37 +9,31 @@ import { ToastContainer } from "react-toastify";
 import { Container, PaletteMode } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 
-
 // --------------------------- css
 import "react-toastify/dist/ReactToastify.css";
-import 'swiper/css';
+import "swiper/css";
 
 // --------------------------- utiles
 import theme from "../theme/theme";
-import palettes from '../theme/colors/colors.json';
-import queryClient from '../utils/queryClient';
+import palettes from "../theme/colors/colors.json";
+import queryClient from "../utils/queryClient";
 // import SideBar "@src/components/shared/sideBar";
 
-
-
-
 interface IProps {
-    defaultPalette?: PaletteMode; // this have used only for storybook
-    children: ReactNode
+  defaultPalette?: PaletteMode; // this have used only for storybook
+  children: ReactNode;
 }
 
-
-export const ThemeLayout = ({ defaultPalette,children }: IProps) => {
-
-    const cacheRtl = createCache({
-        key: "muirtl",
-        stylisPlugins: [prefixer, rtlPlugin],
-    });
-    const [theTheme, ] = useState<PaletteMode>('light');
-    useEffect(() => {
-        const style = document.createElement('style');
-        const colors = palettes[defaultPalette ?? theTheme];
-        style.innerHTML = `
+export const ThemeLayout = ({ defaultPalette, children }: IProps) => {
+  const cacheRtl = createCache({
+    key: "muirtl",
+    stylisPlugins: [prefixer, rtlPlugin],
+  });
+  const [theTheme] = useState<PaletteMode>("light");
+  useEffect(() => {
+    const style = document.createElement("style");
+    const colors = palettes[defaultPalette ?? theTheme];
+    style.innerHTML = `
             :root {
               --color-primary-main: ${colors.primary.main};
               --color-primary-dark: ${colors.primary.dark};
@@ -183,47 +177,44 @@ export const ThemeLayout = ({ defaultPalette,children }: IProps) => {
             }
           `;
 
-        document.head.appendChild(style);
-        return () => {
-            document.head.removeChild(style);
-        };
-    }, [theTheme, defaultPalette]);
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, [theTheme, defaultPalette]);
 
+  return (
+    <QueryClientProvider client={queryClient}>
+      <CacheProvider value={cacheRtl}>
+        <ThemeProvider theme={theme}>
+          <ToastContainer
+            rtl
+            position="bottom-center"
+            autoClose={3000}
+            limit={3}
+            draggablePercent={80}
+            draggable
+          />
+          <CssBaseline />
 
+          {/* <Box sx={{ display: 'flex' }}> */}
+          {/* <SideBar /> */}
 
+          <Container
+            maxWidth="xs"
+            className=" pb-24 p-0 "
+            component="main"
+            sx={{ minHeight: "100vh", backgroundColor: "black", zIndex: "0" }}
+          >
+            {children}
+            {/*<BottomNavigator />*/}
+          </Container>
 
-
-    return (
-        <QueryClientProvider client={queryClient}>
-            <CacheProvider value={cacheRtl}>
-                <ThemeProvider theme={theme}>
-                    <ToastContainer
-                        rtl
-                        position="bottom-center"
-                        autoClose={3000}
-                        limit={3}
-                        draggablePercent={80}
-                        draggable
-                    />
-                    <CssBaseline />
-
-
-                    {/* <Box sx={{ display: 'flex' }}> */}
-                    {/* <SideBar /> */}
-
-
-                    <Container maxWidth='xs' className=" pb-24 p-0 " component="main" sx={{ minHeight: "100vh", backgroundColor: 'white', zIndex:"0" }}>
-                        {children}
-                        {/*<BottomNavigator />*/}
-                    </Container>
-
-                    {/* </Box> */}
-
-
-                </ThemeProvider>
-            </CacheProvider>
-        </QueryClientProvider>
-    )
-}
+          {/* </Box> */}
+        </ThemeProvider>
+      </CacheProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default ThemeLayout;

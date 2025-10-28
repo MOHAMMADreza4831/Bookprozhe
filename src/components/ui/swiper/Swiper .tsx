@@ -1,8 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
-import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
+// import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
 import { useRef } from "react";
-import { products } from "@src/components/Data/ProductData";
+// import { products } from "@src/components/Data/ProductData";
 import "@src/styles/index.css";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -36,7 +36,7 @@ export default function SwiperHome() {
         className="flex items-start justify-start h-[380px] "
         slidesPerView={1}
       >
-        {products?.map((item) => (
+        {/* {products?.map((item) => (
           <SwiperSlide key={item.id} className="   h-full">
             <Card className="flex items-center  justify-between overflow-auto rounded-xl ">
               <div className="flex flex-col justify-center items-start gap-2">
@@ -63,7 +63,7 @@ export default function SwiperHome() {
               </div>
             </Card>
           </SwiperSlide>
-        ))}
+        ))} */}
       </Swiper>
     </div>
   );

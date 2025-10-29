@@ -41,23 +41,10 @@ const Home = () => {
     },
   ];
 
-  return (
-    <>
-      <div className="px-2">
-        <NavbarHome />
-        <div>
-          <div>
-            <div className="flex flex-col ">
-              <SwiperHome />
-            </div>
-          </div>
-          <div>
-            <Home_Header />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+  return 
+   <>
+  
+  </>;
 };
 
 export default Home;

@@ -22,6 +22,7 @@
     "@mui/x-date-pickers": "^7.29.4",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tanstack/react-query": "^5.84.2",
+    "animejs": "^4.2.2",
     "axios": "^1.11.0",
     "color": "^4.2.3",
     "customize-cra": "^1.0.0",

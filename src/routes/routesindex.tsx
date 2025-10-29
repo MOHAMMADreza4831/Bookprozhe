@@ -8,9 +8,7 @@ import { lazy } from "react";
 import Layout from "../components/shared/layouts/mainLayout.tsx";
 import { PATH_AUTH, PATH_BOOKS, PATH_DASHBOARD } from "./paths";
 import AuthLayout from "../components/shared/layouts/authLayout.tsx";
-import AboutHistoricalBook from "@src/components/About the book/Product";
 // import BooksCategoryDashboardPage from "@src/components/About the book/BooksCategoryDashboardPage";
-import ProductsPage from "@src/components/About the book/ProductsPage";
 import Home from "../components/pages/Home/Home";
 
 import Shop from "../components/shop/ShopList";
@@ -34,7 +32,9 @@ import SearchBook from "../components/ui/buttons/SearchBook";
 import Basecard from "../components/About the book/basecard";
 import Login2 from "@src/components/login/login2.tsx";
 import Forgotpassword from "@src/components/login/Forgot password.tsx";
-
+import ChangePassword from "@src/components/login/changepassword.tsx";
+import Loginnew from "@src/components/login/loginNEW/loginnew.tsx";
+import Setpassword from "@src/components/login/Setpassword.tsx";
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
 
@@ -66,20 +66,32 @@ export const routes: RouteObject[] = [
       //   element: <Navigate to={PATH_AUTH.login} replace />,
       // },
       {
-        path:"register",
-        element: <Register />
+        path: "register",
+        element: <Register />,
       },
       {
         path: "login",
         element: <Login1 />,
       },
       {
+        path: "setpassword",
+        element: <Setpassword />,
+      },
+      {
         path: "forgotpassword",
         element: <Forgotpassword />,
       },
       {
+        path: "ChangePassword",
+        element: <ChangePassword />,
+      },
+      {
         path: "loginagain",
-        element: <Login2/>,
+        element: <Login2 />,
+      },
+      {
+        path: "loginnew",
+        element: <Loginnew />,
       },
       // {
       //   path: "dashboard/category/:type",
@@ -155,7 +167,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: PATH_DASHBOARD.navigator.search,
-            element: <SearchBook  />,
+            element: <SearchBook />,
           },
           {
             path: PATH_DASHBOARD.navigator.profile,

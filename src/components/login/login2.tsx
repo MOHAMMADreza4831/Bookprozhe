@@ -1,4 +1,4 @@
-import { Alert, Button, Divider, TextField } from "@mui/material";
+import { Divider, TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import logo from "@src/assets/image/wave.png";
 import facebook from "@src/assets/image/icons8-facebook-logo-48.png";
@@ -123,8 +123,11 @@ export default function Login2() {
           </button>
         </div>
       </div>
-      <div className="mt-36 flex justify-center items-center w-full">
-        <Buttoneauth text="ورود" />
+      <div className="mt-[34vh] flex justify-center items-center w-full">
+        <Buttoneauth
+          onClick={() => navigate(PATH_DASHBOARD.navigator.home)}
+          text="ورود"
+        />
       </div>
     </div>
   );

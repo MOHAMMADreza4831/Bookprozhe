@@ -1,7 +1,9 @@
 import { TextField, Typography } from "@mui/material";
 import Buttoneauth from "../ui/buttons/buttonauth";
+import { useNavigate } from "react-router-dom";
 
 export default function Forgotpassword() {
+  const navigate = useNavigate();
   return (
     <div className=" ">
       <div className="mx-9 pt-36">
@@ -32,8 +34,11 @@ export default function Forgotpassword() {
           variant="standard"
         />
       </div>
-      <div className="mt-36 flex justify-center items-center w-full">
-        <Buttoneauth text="ارسال" />
+      <div className=" mt-[40vh] flex justify-center items-end w-full">
+        <Buttoneauth
+          onClick={() => navigate("/auth/setpassword")}
+          text="ارسال"
+        />
       </div>
     </div>
   );

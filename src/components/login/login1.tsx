@@ -56,7 +56,9 @@ export default function Login1() {
   const handelclick = () => {
     navigate("/auth/loginagain");
   };
-
+  const newloginhandel = () => {
+    navigate("/auth/loginnew");
+  };
   return (
     <div className="bg-image h-[100vh] overflow-hidden">
       <div className=" flex flex-col  ">
@@ -73,7 +75,10 @@ export default function Login1() {
           >
             <p className="font-bold text-[20px] ">ورود</p>
           </Button>
-          <Button className=" border border-white/30 flex h-14 rounded-[50px] w-[42vh] my-2 bg-black text-white ">
+          <Button
+            onClick={newloginhandel}
+            className=" border border-white/30 flex h-14 rounded-[50px] w-[42vh] my-2 bg-black text-white "
+          >
             <p className="text-[18px]">اگر حساب ندارید اینجا کلیک کنید !</p>
           </Button>
         </div>

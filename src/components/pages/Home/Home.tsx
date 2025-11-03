@@ -1,50 +1,34 @@
-import NewCard from "@src/components/Homecomponents/NewCard";
-import ShortStoriesCard from "@src/components/Homecomponents/ShortStoriesCard";
-import RomanCard from "@src/components/Homecomponents/RomanCard";
-import { Link } from "react-router-dom";
-import HistoricalCard from "@src/components/Homecomponents/HistoricalCard";
-import NavbarHome from "@src/components/Homecomponents/navbarhome";
-import { useEffect } from "react";
-import queryClient from "@src/utils/queryClient";
-import SearchBook from "@src/components/ui/buttons/SearchBook";
-import { AnimatePresence, motion } from "framer-motion";
-import SwiperHome from "@src/components/ui/swiper/Swiper ";
 import Home_Header from "./Home_Header";
+import { Box } from "@mui/material";
+import Cards from "@src/components/Homecomponents/Card";
+import Grouping_cards from "@src/components/Homecomponents/Grouping_cards";
+import Recommended from "@src/components/Homecomponents/Recommended";
+import HeaderSwiper from "@src/components/ui/swiper/Swiper ";
 
 const Home = () => {
-  useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ["basket"] });
-    queryClient.invalidateQueries({ queryKey: ["basket1"] });
-    queryClient.invalidateQueries({ queryKey: ["basket2"] });
-    queryClient.invalidateQueries({ queryKey: ["basket3"] });
-  }, []);
-  const categories = [
-    {
-      name: "جدیدترین‌ها",
-      path: "/products/newbook",
-      component: NewCard,
-    },
-    {
-      name: "کتاب‌های تاریخی",
-      path: "/products/historicalbook",
-      component: HistoricalCard,
-    },
-    {
-      name: "کتاب‌های رمان",
-      path: "/products/roman",
-      component: RomanCard,
-    },
-    {
-      name: "داستان‌های کوتاه",
-      path: "/products/shortstory",
-      component: ShortStoriesCard,
-    },
-  ];
-
-  return 
-   <>
-  
-  </>;
+  return (
+    <>
+      <Box>
+        <Box>
+          <Home_Header />
+        </Box>
+        <Box className="pt-10">
+          <HeaderSwiper />
+        </Box>
+        <Box className="pt-20">
+          <Cards />
+        </Box>
+        <Box className="pt-16">
+          <Grouping_cards />
+        </Box>
+        <Box className="pt-20">
+          <Recommended />
+        </Box>
+        <Box className="pt-20">
+          <Cards title="Criminal" />
+        </Box>
+      </Box>
+    </>
+  );
 };
-
 export default Home;

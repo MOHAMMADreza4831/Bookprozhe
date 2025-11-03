@@ -15,7 +15,7 @@ html {
   width: 100%;
   height: 100%;
 }
-body { 
+body {
   background-color: black;
 }
 .button_login {
@@ -24,14 +24,30 @@ body {
   backdrop-filter: blur(3.4px);
   -webkit-backdrop-filter: blur(3.4px);
 }
-
-/* .truncate-multi-line {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
 }
-*/
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: red;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2daa9e;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #1c7d74;
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #2daa9e #f1f1f1;
+}
+
 #root {
   background-color: #333;
 }

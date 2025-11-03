@@ -26,7 +26,7 @@ import Favorites from "../components/pages/Collection/Favorites";
 import SaveCart from "../components/pages/Collection/SaveCart";
 import Splashscrean from "../components/login/splashscrean";
 import Login1 from "../components/login/login1";
-import ProductList from "../hooks/ProductList";
+// import ProductList from "../hooks/ProductList";
 import Register from "../components/login/register";
 import SearchBook from "../components/ui/buttons/SearchBook";
 import Basecard from "../components/About the book/basecard";
@@ -35,6 +35,8 @@ import Forgotpassword from "@src/components/login/Forgot password.tsx";
 import ChangePassword from "@src/components/login/changepassword.tsx";
 import Loginnew from "@src/components/login/loginNEW/loginnew.tsx";
 import Setpassword from "@src/components/login/Setpassword.tsx";
+import Settings from "react-multi-date-picker/plugins/settings";
+import Settings_page from "@src/components/Homecomponents/Settings.tsx";
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
 
@@ -120,6 +122,10 @@ export const routes: RouteObject[] = [
         element: <Shop />,
       },
       {
+        path: "Settings_page",
+        element: <Settings_page />,
+      },
+      {
         path: "profile",
         element: <Profilemain />,
       },
@@ -139,28 +145,18 @@ export const routes: RouteObject[] = [
         path: "favorites",
         element: <Favorites />,
       },
-      // {
-      //   path: "products/newbook/:pageNumber",
-      //   element: <ProductsPage />,
-      // },
-      {
-        path: "products/:category/:page",
-        element: <ProductList />,
-      },
-
       {
         path: "product/:id ",
+      },
+      {
+        path: "book/:id",
+        element: <Basecard />,
       },
       {
         path: PATH_DASHBOARD.root,
         errorElement: <ErrorBoundary />,
 
         children: [
-          {
-            path: "book/:id",
-            element: <Basecard />,
-          },
-
           {
             index: true,
             element: <Dashboard />,

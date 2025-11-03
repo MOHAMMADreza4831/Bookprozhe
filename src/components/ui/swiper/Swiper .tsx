@@ -1,70 +1,55 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, Navigation } from "swiper/modules";
-// import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
-import { useRef } from "react";
-// import { products } from "@src/components/Data/ProductData";
-import "@src/styles/index.css";
 import "swiper/css";
-import "swiper/css/pagination";
-export default function SwiperHome() {
-  const progressCircle = useRef<HTMLDivElement>(null);
-  const progressContent = useRef<HTMLSpanElement>(null);
-
-  const onAutoplayTimeLeft = (_s: any, time: number, progress: number) => {
-    if (progressCircle.current) {
-      progressCircle.current.style.setProperty("--progress", `${1 - progress}`);
-    }
-    if (progressContent.current) {
-      progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-    }
-  };
-
+import "swiper/css/autoplay";
+import { Autoplay } from "swiper/modules";
+import image1 from "@src/assets/image/bedroom-4249736_1280 2.png";
+import image2 from "@src/assets/image/berlin-wall-50730_1280 1.png";
+import image3 from "@src/assets/image/books-1678014_1280 2.png";
+import image4 from "@src/assets/image/nature-7189418_1280 2.png";
+const HeaderSwiper = () => {
   return (
-    <div className="  ">
+    <div className="w-full bg-white/30 backdrop-blur-xl border-b border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)] overflow-hidden">
       <Swiper
-        spaceBetween={10}
-        centeredSlides={true}
+        modules={[Autoplay]}
+        slidesPerView={"auto"}
+        loop={true}
+        freeMode={true}
+        allowTouchMove={false}
+        speed={2000}
         autoplay={{
-          delay: 5500,
+          delay: 0,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Autoplay, Pagination, Navigation]}
-        onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="flex items-start justify-start h-[380px] "
-        slidesPerView={1}
+        className="w-full h-[40px] flex items-center"
       >
-        {/* {products?.map((item) => (
-          <SwiperSlide key={item.id} className="   h-full">
-            <Card className="flex items-center  justify-between overflow-auto rounded-xl ">
-              <div className="flex flex-col justify-center items-start gap-2">
-                <Typography className="break-words text-sm text-gray-600">
-                  {item.paragraf}
-                </Typography>
-                <Typography className="w-[140px]  overflow-hidden text-2xl font-bold">
-                  {item.text}
-                </Typography>
-                <p className="font-medium text-3xl text-[#ea4c13]">
-                  {item.discount}%
-                </p>
-                <Button className="bg-[#ea4c13] text-white px-4 py-2 rounded-full hover:bg-[#c5360f] transition">
-                  claim
-                </Button>
-              </div>
-              <div className="w-full    flex justify-center    ">
-                <CardMedia
-                  component="img"
-                  image={item.image}
-                  alt={item.title}
-                  className="object-contain w-full h-[350px]"
-                />
-              </div>
-            </Card>
-          </SwiperSlide>
-        ))} */}
+        <SwiperSlide className="!w-auto">
+          <div className="w-full h-full bg-black   text-lg font-medium text-primary">
+            <img src={image1} className="object-cover h-full w-full" />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="!w-auto">
+          <div className="text-lg font-medium text-primary w-full h-full ">
+            <img src={image2} alt="" className="object-cover h-full w-full" />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="!w-auto">
+          <div className=" w-full h-full text-lg font-medium text-primary">
+            <img src={image3} alt="" className="object-cover h-full w-full" />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="!w-auto  ">
+          <div className=" h-full w-full">
+            <img src={image4} className="w-full h-full object-cover" />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="!w-auto">
+          <div className=" w-full h-full text-lg font-medium text-primary">
+            <img src={image3} alt="" className="object-cover h-full w-full" />
+          </div>
+        </SwiperSlide>
       </Swiper>
     </div>
   );
-}
+};
+
+export default HeaderSwiper;

@@ -5,7 +5,7 @@ import { Box, Divider, Typography, Button } from "@mui/material";
 import { FiBookmark } from "react-icons/fi";
 import { useState } from "react";
 import { FaBookmark } from "react-icons/fa";
-
+import "@src/styles/index.css";
 export default function Basecard() {
   const { id } = useParams();
   const bookId = Number(id);
@@ -97,22 +97,15 @@ export default function Basecard() {
             <Typography variant="bold18" className="text-white scroll-mx-10">
               درباره کتاب
             </Typography>
-            <p className="h-[150px] overflow-y-auto custom-scrollbar ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-              aperiam deleniti ipsum labore cupiditate, ratione pariatur velit
-              aliquid magnam nihil, quis dignissimos nisi amet dolorem delectus
-              porro similique mollitia eveniet! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Iste accusamus alias doloribus
-              laborum id expedita sint numquam omnis ducimus! Praesentium ipsa
-              eaque modi, inventore aliquam consectetur deleniti sequi ex
-              eveniet?
+            <p className=" custom-scrollbar text-right text-justify h-[150px] overflow-y-auto ">
+              {book.aboute}
             </p>
           </Box>
         </Box>
       </Box>
       <Box className="fixed bottom-5 h-[60px]">
         <Button className="mx-8 w-[300px] rounded-[10px] text-white p-4 bg-[#2DAA9E]  ">
-          شروع ب خواندن
+          شروع به خواندن
         </Button>
         <Button
           onClick={() => handelsubmit()}
@@ -125,7 +118,7 @@ export default function Basecard() {
           }}
           className=" bg-[#2DAA9E]  h-[10px] rounded-[10px] text-white "
         >
-          {active ? <FaBookmark className="" /> : <FiBookmark />}
+          {active ? <FaBookmark /> : <FiBookmark />}
         </Button>
       </Box>
     </Box>

@@ -42,12 +42,15 @@ export const Card_detail = [
     price: "$ 1200",
     image: image1,
     id: 1,
+    aboute:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,aperiam deleniti ipsum labore cupiditate, ratione pariatur velit              aliquid magnam nihil, quis dignissimos nisi amet dolorem delectus              porro similique mollitia eveniet! Lorem ipsum dolor sit amet              consectetur adipisicing elit. Iste accusamus alias doloribus              laborum id expedita sint numquam omnis ducimus! Praesentium ipsa            eaque modi, inventore aliquam consectetur deleniti sequi ex            eveniet?",
     title: " the forest princess ",
     Genre: "Criminal",
   },
   {
     Author: " Author Author",
-
+    aboute:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,aperiam deleniti ipsum labore cupiditate, ratione pariatur velit              aliquid magnam nihil, quis dignissimos nisi amet dolorem delectus              porro similique mollitia eveniet! Lorem ipsum dolor sit amet              consectetur adipisicing elit. Iste accusamus alias doloribus              laborum id expedita sint numquam omnis ducimus! Praesentium ipsa            eaque modi, inventore aliquam consectetur deleniti sequi ex            eveniet?",
     Rate: 1.2,
     numberpage: 210,
     Language: "PR",
@@ -59,6 +62,8 @@ export const Card_detail = [
   },
   {
     Author: "Author Author",
+    aboute:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,aperiam deleniti ipsum labore cupiditate, ratione pariatur velit              aliquid magnam nihil, quis dignissimos nisi amet dolorem delectus              porro similique mollitia eveniet! Lorem ipsum dolor sit amet              consectetur adipisicing elit. Iste accusamus alias doloribus              laborum id expedita sint numquam omnis ducimus! Praesentium ipsa            eaque modi, inventore aliquam consectetur deleniti sequi ex            eveniet?",
 
     Rate: 5,
     numberpage: 202,
@@ -71,6 +76,8 @@ export const Card_detail = [
   },
   {
     Author: "Author Author",
+    aboute:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,aperiam deleniti ipsum labore cupiditate, ratione pariatur velit              aliquid magnam nihil, quis dignissimos nisi amet dolorem delectus              porro similique mollitia eveniet! Lorem ipsum dolor sit amet              consectetur adipisicing elit. Iste accusamus alias doloribus              laborum id expedita sint numquam omnis ducimus! Praesentium ipsa            eaque modi, inventore aliquam consectetur deleniti sequi ex            eveniet?",
 
     Rate: 2.2,
     numberpage: 201,

@@ -25,27 +25,32 @@ body {
   -webkit-backdrop-filter: blur(3.4px);
 }
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 3px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: red;
-  border-radius: 10px;
+  border-radius: 100px;
+  background-color: #292d38;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #2daa9e;
-  border-radius: 10px;
+  border-radius: 100px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #1c7d74;
 }
 
-/* Firefox */
+.custom-scrollbar::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 .custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #2daa9e #f1f1f1;
+  width: 400px;
+  padding-left: 20px;
 }
 
 #root {

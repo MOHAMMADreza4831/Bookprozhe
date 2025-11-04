@@ -12,7 +12,7 @@ const BottomNavigator = () => {
   }
   return (
     <Stack
-      className="z-10  "
+      className="z-10   "
       sx={{
         position: "fixed",
         bottom: 0,
@@ -22,28 +22,30 @@ const BottomNavigator = () => {
       }}
     >
       <Container
-        className=""
         maxWidth="xs"
+        className=""
         sx={{
-          backgroundColor: "",
-
           borderTop: "solid px #eee",
         }}
       >
         <BottomNavigation
           showLabels
           value={value}
-          onChange={(_event, newValue) => setValue(newValue)}
-          className="rounded-t-[16px] h-[70px] "
+          onChange={(_event, newValue) => {
+            setValue(newValue);
+          }}
+          className=" mb-3 flex justify-around  rounded-t-[16px] h-[70px]"
         >
-          {BottomNavigationItems.map((item, index) => (
-            <BottomNavigationBtn
-              key={item.title + index}
-              title={item.title}
-              route={item.route}
-              Icon={item.Icon}
-            />
-          ))}
+          {BottomNavigationItems.map((item, index) => {
+            return (
+              <BottomNavigationBtn
+                key={item.title + index}
+                title={item.title}
+                route={item.route}
+                Icon={item.Icon}
+              />
+            );
+          })}
         </BottomNavigation>
       </Container>
     </Stack>
@@ -53,28 +55,40 @@ const BottomNavigator = () => {
 export default BottomNavigator;
 
 const BottomNavigationBtn = ({ title, route, Icon }: INavigationItem) => {
+  // const [Active, setActive] = useState(false);
   const location = useLocation();
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const active = location.pathname === route;
+
+  let content;
+
+  if (active) {
+    content = (
+      <div className="flex  items-center justify-center ">
+        <div
+          className={`w-[90px] h-10 rounded-[20px] flex items-center justify-center gap-2 transition-all duration-700 ease-out
+    ${active ? "bg-[#2daa9e] translate-[18px] shadow-xl" : "bg-gray-200 shadow-sm"}
+  `}
+        >
+          <Icon className={`${active ? "text-white" : "text-gray-500"}`} />
+          <Typography
+            className={`text-sm ${active ? "text-white" : "text-gray-500"}`}
+          >
+            {title}
+          </Typography>
+        </div>
+      </div>
+    );
+  } else {
+    content = (
+      <div className="flex items-center justify-center">
+        <Icon className="text-gray-400" />
+      </div>
+    );
+  }
 
   return (
-    <Link
-      to={route}
-      className={` flex flex-1  flex-col items-center justify-center   `}
-    >
-      <div
-        className={`rounded-2xl flex flex-1  flex-col items-center  justify-center gap-2 `}
-      >
-        <Icon
-          className={`text-3xl  text-${isActive(route) ? "primary-main" : "black"}`}
-        />
-        <Typography
-          className={`text-sm text-${isActive(route) ? "primary-main" : "black"}`}
-        >
-          {title}
-        </Typography>
-      </div>
+    <Link className="flex justify-center items-center" to={route}>
+      {content}
     </Link>
   );
 };

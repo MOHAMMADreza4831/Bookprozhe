@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Genredata } from "../Data/ProductData";
+import { RecommendedForyou } from "../Data/ProductData";
 import { Box, Typography } from "@mui/material";
 import "swiper/css";
 
@@ -11,7 +11,7 @@ export default function Recommended() {
         spaceBetween={20}
         pagination={{ clickable: true }}
       >
-        {Genredata.map((item, index) => (
+        {RecommendedForyou.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-[150px] h-[100px] overflow-hidden rounded-2xl">
               <img src={item.image} className="w-full h-full object-cover" />

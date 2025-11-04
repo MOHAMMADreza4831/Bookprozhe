@@ -3,6 +3,8 @@ import { Box } from "@mui/material";
 import Cards from "@src/components/Homecomponents/Card";
 import Grouping_cards from "@src/components/Homecomponents/Grouping_cards";
 import Recommended from "@src/components/Homecomponents/Recommended";
+import SeeMore from "@src/components/Homecomponents/seemore";
+import BottomNavbar from "@src/components/Homecomponents/test";
 import HeaderSwiper from "@src/components/ui/swiper/Swiper ";
 
 const Home = () => {
@@ -15,10 +17,12 @@ const Home = () => {
         <Box className="pt-10">
           <HeaderSwiper />
         </Box>
-        <Box className="pt-20">
+        <Box className="pt-10">
+          <SeeMore title="کتاب های جدید" />
           <Cards />
         </Box>
-        <Box className="pt-16">
+        <Box className="pt-5">
+          <SeeMore title="" />
           <Grouping_cards />
         </Box>
         <Box className="pt-20">
@@ -27,6 +31,7 @@ const Home = () => {
         <Box className="pt-20">
           <Cards title="Criminal" />
         </Box>
+        {/* <BottomNavbar /> */}
       </Box>
     </>
   );

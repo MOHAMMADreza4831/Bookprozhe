@@ -97,7 +97,7 @@ export default function Basecard() {
             <Typography variant="bold18" className="text-white scroll-mx-10">
               درباره کتاب
             </Typography>
-            <p className=" custom-scrollbar text-right text-justify h-[150px] overflow-y-auto ">
+            <p className=" text-[#797979] custom-scrollbar  text-justify h-[150px] overflow-y-auto ">
               {book.aboute}
             </p>
           </Box>

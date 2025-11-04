@@ -6,15 +6,17 @@ import image5 from "@src/assets/image/Mystery.png";
 import image6 from "@src/assets/image/Adventure.png";
 import image7 from "@src/assets/image/sina.png";
 import image8 from "@src/assets/image/Criminal.png";
-
-import icone1 from "@src/assets/image/icone 1 .png";
-import icone2 from "@src/assets/image/icons8-update-50.png";
-import icone3 from "@src/assets/image/icons8-profile-50.png";
+import darsi from "@src/assets/image/61a2fa9d3556af9abf2f0c3e397909a5.png";
+import manga from "@src/assets/image/08de020ad7502a0f6334d486430fd39f.png";
+import roman from "@src/assets/image/b7d132d9591b535b86a47febf6f390e3.png";
+import icone1 from "@src/assets/image/ProfileCircle-Outline-32px.png";
+// import icone2 from "@src/assets/image/icons8-update-50.png";
+// import icone3 from "@src/assets/image/icons8-profile-50.png";
 
 export const alarm = [
   { title: "بروزرسانی امنیتی ", image: icone1 },
-  { title: "بروزرسانی کنید ", image: icone2 },
-  { title: "شما پروفایل خود را کامل کردید ", image: icone3 },
+  // { title: "بروزرسانی کنید ", image: icone2 },
+  // { title: "شما پروفایل خود را کامل کردید ", image: icone3 },
 ];
 
 // export const genertitle = [
@@ -23,6 +25,8 @@ export const alarm = [
 //   { title: "تاریخی", id: 3 },
 //   { title: "معمایی", id: 2 },
 // ];
+
+
 export const Dataemail = [
   {
     id: 1,
@@ -142,8 +146,15 @@ export const Card_detail = [
 // ];
 
 export const Genredata = [
-  { Gener: "Scientific", id: 1, image: image7 },
-  { Gener: "Adventure", id: 2, image: image6 },
-  { Gener: "Mystery", id: 2, image: image5 },
-  { Gener: "Criminal", id: 2, image: image8 },
+  { Gener: "علمی", id: 1, image: image7 },
+  { Gener: "ماجراجویی", id: 2, image: image6 },
+  { Gener: "رمز و راز", id: 2, image: image5 },
+  { Gener: "جنایی", id: 2, image: image8 },
+];
+
+export const RecommendedForyou = [
+  { Gener: "درسی", id: 1, image: darsi },
+  { Gener: "مانگا", id: 2, image: manga },
+  { Gener: "رومان", id: 2, image: roman },
+  { Gener: "جنایی", id: 2, image: image8 },
 ];

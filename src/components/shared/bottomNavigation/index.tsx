@@ -10,6 +10,9 @@ const BottomNavigator = () => {
   if (location.pathname.startsWith("/book/")) {
     return null;
   }
+  if (location.pathname.startsWith("/genrelist")) {
+    return null;
+  }
   return (
     <Stack
       className="z-10   "
@@ -17,7 +20,7 @@ const BottomNavigator = () => {
         position: "fixed",
         bottom: 0,
         left: 0,
-        right: 0,
+        right: 0, 
         background: "",
       }}
     >

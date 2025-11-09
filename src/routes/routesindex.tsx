@@ -37,6 +37,7 @@ import Loginnew from "@src/components/login/loginNEW/loginnew.tsx";
 import Setpassword from "@src/components/login/Setpassword.tsx";
 import Settings from "react-multi-date-picker/plugins/settings";
 import Settings_page from "@src/components/Homecomponents/Settings.tsx";
+import Genrelist from "@src/components/pages/card/generlist.tsx";
 // ------------------------------------------- Pages
 const Dashboard = lazy(() => import("../components/pages/dashboard/main"));
 
@@ -149,9 +150,14 @@ export const routes: RouteObject[] = [
         path: "product/:id ",
       },
       {
+        path: "genrelist/:id",
+        element: <Genrelist />,
+      },
+      {
         path: "book/:id",
         element: <Basecard />,
       },
+
       {
         path: PATH_DASHBOARD.root,
         errorElement: <ErrorBoundary />,

@@ -11,7 +11,8 @@ export default function Home_Header() {
     <>
       <Box className="flex justify-around pt-9 ">
         <Box className="flex justify-between w-16 items-center   ">
-          <Button onClick={() => navigate("/Settings_page")}>
+          {/* <Button onClick={() => navigate("/Settings_page")}> */}
+          <Button>
             <FaBell className="text-white size-5 " />
           </Button>
           <Box>

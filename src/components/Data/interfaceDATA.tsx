@@ -90,6 +90,8 @@ export interface Book {
   author: string;
   Genre: string;
   AbotBook: string;
+  aboute?: string;
+  Genrets?: string[];
   book_files: databook_files[];
   priceTranslation: number;
   pages: number;

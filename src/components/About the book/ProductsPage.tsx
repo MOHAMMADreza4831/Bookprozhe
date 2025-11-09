@@ -22,7 +22,6 @@ export default function ProductsPage() {
   const [books, setBooks] = useState<Book[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
 
-  // بارگذاری کتاب‌ها بر اساس دسته
   useEffect(() => {
     if (!category) return;
 

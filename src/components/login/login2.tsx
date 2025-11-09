@@ -56,7 +56,7 @@ export default function Login2() {
             "& .MuiInput-underline:after": { borderBottomColor: "white" },
           }}
           label="ایمیل"
-          className="text-white  "
+          className="text-white  mx-6  "
           variant="standard"
         />
         <TextField
@@ -75,7 +75,7 @@ export default function Login2() {
             "& .MuiInput-underline:after": { borderBottomColor: "white" },
           }}
           label="رمز عبور "
-          className="text-white  "
+          className="text-white mx-6 "
           variant="standard"
         />
       </div>

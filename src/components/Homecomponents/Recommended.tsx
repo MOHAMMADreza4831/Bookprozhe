@@ -1,9 +1,16 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { RecommendedForyou } from "../Data/ProductData";
-import { Box, Typography } from "@mui/material";
+import { RecommendedForyou, genre } from "../Data/ProductData";
+import { Box, Card, Typography } from "@mui/material";
 import "swiper/css";
+import { Book } from "../Data/Allbooks";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Recommended() {
+  const [books, setBooks] = useState<Book[]>([]);
+  const filter = genre.map((item) => item.data);
+  console.log(filter);
+  const navigate = useNavigate();
   return (
     <Box className="px-4">
       <Swiper
@@ -11,20 +18,17 @@ export default function Recommended() {
         spaceBetween={20}
         pagination={{ clickable: true }}
       >
-        {RecommendedForyou.map((item, index) => (
+        {filter[0].map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-[150px] h-[100px] overflow-hidden rounded-2xl">
-              <img src={item.image} className="w-full h-full object-cover" />
-
-              <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
-
+            <Card className="relative w-[150px] h-[100px] overflow-hidden rounded-2xl">
+              <Link to={`/genrelist/${item.id}`}>
+                <img src={item.image} className="w-full h-full object-cover" />
+              </Link>
               <Typography
                 variant="subtitle1"
                 className="absolute bottom-2 left-2 text-white font-semibold drop-shadow-md"
-              >
-                {item.Gener}
-              </Typography>
-            </div>
+              ></Typography>
+            </Card>
           </SwiperSlide>
         ))}
       </Swiper>

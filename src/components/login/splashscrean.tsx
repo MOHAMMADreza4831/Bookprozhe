@@ -4,6 +4,7 @@ import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Button, Spinner } from "flowbite-react";
 
+import gif from "@src/assets/gif/svg hero1.webm";
 export default function Splashscrean() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();

@@ -202,7 +202,7 @@ export const ThemeLayout = ({ defaultPalette, children }: IProps) => {
 
           <Container
             maxWidth="xs"
-            className=" pb-24 p-0 "
+            className="  p-0 "
             component="main"
             sx={{ minHeight: "100vh", backgroundColor: "black", zIndex: "0" }}
           >

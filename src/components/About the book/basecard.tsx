@@ -6,6 +6,7 @@ import { FiBookmark } from "react-icons/fi";
 import { useState } from "react";
 import { FaBookmark } from "react-icons/fa";
 import "@src/styles/index.css";
+import { PATH_DASHBOARD } from "@src/routes/paths";
 export default function Basecard() {
   const { id } = useParams();
   const bookId = Number(id);
@@ -16,7 +17,7 @@ export default function Basecard() {
     return (
       <div className="p-6 text-center">
         <p>❌ کتاب پیدا نشد</p>
-        <Link to="/Shop" className="text-blue-500">
+        <Link to={PATH_DASHBOARD.navigator.home} className="text-blue-500">
           بازگشت به فروشگاه
         </Link>
       </div>

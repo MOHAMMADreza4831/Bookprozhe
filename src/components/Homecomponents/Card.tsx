@@ -2,7 +2,6 @@ import { Box, Card, Typography } from "@mui/material";
 import { Card_detail } from "@src/components/Data/ProductData";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FaStar } from "react-icons/fa";
-import { title } from "process";
 import { Link } from "react-router-dom";
 
 type Datatype = {
@@ -20,9 +19,6 @@ export default function Cards({ title }: Datatype) {
         clickable: true,
       }}
     >
-      {/* <Typography variant="subtitle2" className="text-white">
-        {title}
-      </Typography> */}
       {Card_detail.map((item) => (
         <SwiperSlide className="" key={item.id}>
           <Box className="flex flex-col  ">
